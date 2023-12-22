@@ -20,8 +20,7 @@ export default function SignUp({ navigation }) {
                     </View>
                     <View>
                         <View style={styles.inputBoxes}>
-                            <Text>E-mail</Text>
-                            <TextInput mode="outlined" style={styles.textInputs}/>
+                            <TextInput mode="outlined" style={styles.textInputs} label='E-mail'/>
                         </View>
                         <View style={styles.inputBoxes}>
                             <Text>Password</Text>
