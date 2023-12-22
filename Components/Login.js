@@ -39,26 +39,25 @@ export default function Login({ navigation }) {
             } else {
                 console.log('invalid password')
             }
-        }
-        
-        
-        
+        }     
     }
 
   return (
     <SafeAreaView style={styles.Content}>
-        <Avatar.Image size={100} source={require('../assets/StoreIO_Logo.png')} style={{marginBottom:50, backgroundColor:'rgba(0,0,0,0)'}}/>
+        <View style={{marginBottom: 50, alignItems:'center'}}>
+            <Avatar.Image size={100} source={require('../assets/StoreIO_Logo.png')} style={{backgroundColor:'rgba(0,0,0,0)'}}/>
+            <Text style={{marginTop: 20, fontSize: 30}}>Inventoraku</Text>
+        </View>
         <View style={styles.view}>
-            <Card>
-                <Card.Title title = "Inventoraku" titleStyle={styles.title}></Card.Title>
+            <Card style={{backgroundColor:'#987554'}}>
                 <Card.Content>
                     <TextInput label= "E-mail" keyboardType='email-address' onChangeText={setEmail}></TextInput>
                     <TextInput label="Password" secureTextEntry={pVisibility} style={{marginTop:10}} onChangeText={setPassword} right={<TextInput.Icon icon={eyeIcon} onPress={showPass}/>}/>
-                    <Button style={{alignSelf:'flex-end'}}>Forgot password?</Button>
-                    <Button mode='contained' onPress={logIn}>Log-in</Button>
+                    <Button textColor='white' style={{alignSelf:'flex-end'}}>Forgot Password?</Button>
+                    <Button buttonColor='#E5D3B3' textColor='black' mode='contained' onPress={logIn}>Log-in</Button>
                     <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center', marginTop: 10}}>
                         <Text>Don't have an account?</Text>
-                        <Button onPress={toSignUp}>Sign-up</Button>
+                        <Button textColor='white' onPress={toSignUp}>Sign-up</Button>
                     </View>
                 </Card.Content>
             </Card>
@@ -72,11 +71,9 @@ const styles = StyleSheet.create({
         flex:1,
         justifyContent: 'center',
         alignItems:'center',
+        backgroundColor: '#E5D3B3'
     },
     view:{
         width:'80%'
     },
-    title:{
-        alignSelf:'center'
-    }
 })
