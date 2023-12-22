@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { Card, Text, TextInput, Button, Avatar } from 'react-native-paper'
 import { StyleSheet, View } from 'react-native'
 
-export default function Login() {
+export default function Login({ navigation }) {
     const [pVisibility, setPVisibility] = useState(true)
     const [eyeIcon, setIcon] = useState('eye-off')
     const showPass = () => {
@@ -15,6 +15,11 @@ export default function Login() {
             setIcon('eye-off')
         }
     }
+
+    const toSignUp = () => {
+        navigation.navigate('SignUp')
+    }
+
   return (
     <SafeAreaView style={styles.Content}>
         <Avatar.Image size={100} source={require('../assets/StoreIO_Logo.png')} style={{marginBottom:50, backgroundColor:'rgba(0,0,0,0)'}}/>
@@ -28,7 +33,7 @@ export default function Login() {
                     <Button mode='contained'>Log-in</Button>
                     <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
                         <Text>Don't have an account?</Text>
-                        <Button>Sign-up</Button>
+                        <Button onPress={toSignUp}>Sign-up</Button>
                     </View>
                 </Card.Content>
             </Card>
