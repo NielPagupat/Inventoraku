@@ -44,7 +44,7 @@ export default function Login({ navigation }) {
         
         
     }
-    
+
   return (
     <SafeAreaView style={styles.Content}>
         <Avatar.Image size={100} source={require('../assets/StoreIO_Logo.png')} style={{marginBottom:50, backgroundColor:'rgba(0,0,0,0)'}}/>
@@ -52,11 +52,11 @@ export default function Login({ navigation }) {
             <Card>
                 <Card.Title title = "Inventoraku" titleStyle={styles.title}></Card.Title>
                 <Card.Content>
-                    <TextInput label= "email" keyboardType='email-address' onChangeText={setEmail}></TextInput>
-                    <TextInput label="password" secureTextEntry={pVisibility} style={{marginTop:10}} onChangeText={setPassword} right={<TextInput.Icon icon={eyeIcon} onPress={showPass}/>}/>
+                    <TextInput label= "E-mail" keyboardType='email-address' onChangeText={setEmail}></TextInput>
+                    <TextInput label="Password" secureTextEntry={pVisibility} style={{marginTop:10}} onChangeText={setPassword} right={<TextInput.Icon icon={eyeIcon} onPress={showPass}/>}/>
                     <Button style={{alignSelf:'flex-end'}}>Forgot password?</Button>
                     <Button mode='contained' onPress={logIn}>Log-in</Button>
-                    <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
+                    <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center', marginTop: 10}}>
                         <Text>Don't have an account?</Text>
                         <Button onPress={toSignUp}>Sign-up</Button>
                     </View>

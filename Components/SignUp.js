@@ -3,7 +3,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { StyleSheet, ScrollView, View } from "react-native";
 import { Avatar, Button, Card, Text, TextInput} from "react-native-paper";
 
-export default function SignUp() {
+export default function SignUp({ navigation }) {
+    
+    const backToLogin = () => {
+        navigation.goBack();
+    }
+
     return (
         <SafeAreaView style={styles.Content}>
             <Avatar.Image size={100} source={require('../assets/StoreIO_Logo.png')} style={{marginBottom: 20, backgroundColor:'rgba(0,0,0,0)'}}/>
@@ -45,7 +50,8 @@ export default function SignUp() {
                             <Text>Address</Text>
                             <TextInput mode="outlined" style={styles.textInputs}/>
                         </View>
-                        <View style={{alignItems:'center', marginTop: 20}}>
+                        <View style={{flexDirection: "row", justifyContent:'space-between', marginTop: 20}}>
+                            <Button onPress={backToLogin}> Back </Button>
                             <Button mode="elevated" style={{width: '65%',}}> Next </Button>
                         </View>
                     </View>
@@ -60,6 +66,7 @@ const styles = StyleSheet.create({
     Content: {
         flex:1,
         alignItems: 'center',
+        justifyContent: 'center',
     },
     view: {
         width: '80%'
