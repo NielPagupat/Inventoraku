@@ -45,11 +45,7 @@ export default function SignUp() {
                             <Text>Address</Text>
                             <TextInput mode="outlined" style={styles.textInputs}/>
                         </View>
-                        <View style={styles.inputBoxes}>
-                            <Text>OTP</Text>
-                            <TextInput mode="outlined" style={{height: 35, width: '50%'}}/>
-                        </View>
-                        <View style={{alignItems:'center', marginTop: 30}}>
+                        <View style={{alignItems:'center', marginTop: 20}}>
                             <Button mode="elevated" style={{width: '65%',}}> Next </Button>
                         </View>
                     </View>
