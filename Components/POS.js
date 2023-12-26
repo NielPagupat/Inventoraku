@@ -1,21 +1,65 @@
-import { View, Text } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, StyleSheet } from 'react-native'
+import React, { useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Card, Button, TextInput} from 'react-native-paper'
 import BottomNavigation from '../NavigationBars/BottomNavigation'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import TopNavigation from '../NavigationBars/TopNavigation'
+import { BarCodeScanner } from 'expo-barcode-scanner';
+
 export default function POS() {
     const [total, setTotal] = useState('0');
+    const [productID, setProductID] = useState();
     const add = () => {
         let number = parseInt(total)
         let data = number + 1
         setTotal(data.toString())
     }
+
+    //Barcode Scanner
+    const [hasPermission, setHasPermission] = useState(null);
+    const [scanned, setScanned] = useState(false);
+
+    useEffect(() => {
+        const getBarCodeScannerPermissions = async () => {
+          const { status } = await BarCodeScanner.requestPermissionsAsync();
+          setHasPermission(status === 'granted');
+        };
+    
+        getBarCodeScannerPermissions();
+      }, []); 
+
+      const handleBarCodeScanned = ({ type, data }) => {
+        setScanned(true);
+        setProductID(data)
+        alert('okay')
+      };
+
+      const reset = () =>{
+        setScanned(false)
+        setProductID('')
+      }
+      const showData = () =>{
+        alert(productID)
+      }
+    
+      if (hasPermission === null) {
+        return <Text>Requesting for camera permission</Text>;
+      }
+      if (hasPermission === false) {
+        return <Text>No access to camera</Text>;
+      }
+
+    
   return (
     <SafeAreaView style={{flex:1}}>
         <View><TopNavigation /></View>
-        <View style={{flex:2, justifyContent:'center', alignItems:'center'}}><Text>Scanner Here</Text></View>
+        <View style={{flex:2, justifyContent:'center', alignItems:'center'}}>
+            <BarCodeScanner
+                    onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                    style={StyleSheet.absoluteFillObject}/>
+                     
+        </View>
         <View><TextInput style={{textAlign:"right"}} value={total} readOnly/></View>
         <View style={{backgroundColor:'red', flex:1}}>
             <Card style={{flex:1, backgroundColor:'grey'}}>
@@ -42,8 +86,8 @@ export default function POS() {
                             </View>
                         </View>
                         <View style={{justifyContent:'space-around'}}>
-                            <Button mode='contained'><Icon name='arrow-right'/>next</Button>
-                            <Button mode='contained'><Icon name='barcode'/> Code</Button>
+                            <Button mode='contained' onPress={reset}><Icon name='arrow-right'/>next</Button>
+                            <Button mode='contained' onPress={showData}><Icon name='barcode'/> Code</Button>
                             <Button mode='contained'>X multiply</Button>
                             <Button mode='contained'>$ finish</Button>
 
