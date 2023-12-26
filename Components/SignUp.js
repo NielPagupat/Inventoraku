@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Avatar, Button, Card, Portal, Text, TextInput, Modal, RadioButton} from "react-native-paper";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -15,7 +15,7 @@ export default function SignUp({ navigation }) {
         navigation.goBack();
     }
 
-    const [checked, setChecked] = React.useState('first');
+    const [checked, setChecked] = React.useState('');
 
     return (
         <SafeAreaView style={styles.Content}>
@@ -51,14 +51,20 @@ export default function SignUp({ navigation }) {
                         <View style={styles.inputBoxes}>
                             <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.textInputs} label="Address"/>
                         </View>
-                        <View style={{flexDirection: "row", justifyContent:'space-between', marginTop: 20}}>
-                            <Button textColor="white" onPress={backToLogin}> Back </Button>
-                            <Button mode="elevated" textColor="black" style={{width: '65%',}} onPress={showModal}> Next </Button>
+                        <View style={{flexDirection: "row", justifyContent:'space-between', alignItems:'center', marginTop: 20, marginHorizontal:10}}>
+                            <TouchableOpacity style={{flexDirection:'row', justifyContent:'space-between', width:60}} onPress={backToLogin}>
+                                <Icon color={'white'} name='arrow-left' size={20}/>
+                                <Text style={{color:'white'}}>Back</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={{flexDirection:'row', justifyContent:'space-between', width:60}} onPress={showModal}>
+                                <Text style={{color:'white'}}>Next</Text>
+                                <Icon color={'white'} name='arrow-right' size={20}/>
+                            </TouchableOpacity>
                         </View>
                         <Portal>
                             <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
                                 <View style={{alignItems:'flex-start', marginBottom: 10}}>
-                                    <Button textColor='white'style={{marginHorizontal:10}} onPress={hideModal}>
+                                    <Button textColor='white' style={{marginHorizontal:10}} onPress={hideModal}>
                                         <Icon color={'white'} name="arrow-left" size={20}/>
                                     </Button>
                                 </View>
@@ -71,14 +77,34 @@ export default function SignUp({ navigation }) {
                                 <View>
                                     <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.modalInputs} label="Business Permit Number"/>
                                 </View>
-                                <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
-                                    <Text style={{color: 'white'}}>Payment Option</Text>
-                                    <TextInput activeUnderlineColor="black" style={{height: 35, marginTop: 10, marginHorizontal:10, width:'45%', backgroundColor:'white', borderTopLeftRadius:10, borderTopRightRadius:10, borderRadius:10}}/>
+                                <View style={{flexDirection:'row', alignItems:'center', marginTop: 10, marginLeft:30}}> 
+                                    <Text style={{color: 'white'}}>Payment Options</Text>
+                                </View>
+                                <View style={{flexDirection:'row', marginLeft:70}}>
+                                    <View style={{flexDirection:'row', alignItems:'center'}}>
+                                        <Text style={{color:'white'}}>Monthly</Text>
+                                        <RadioButton
+                                                value="first"
+                                                color="#E5D3B3"
+                                                status={ checked === 'first' ? 'checked' : 'unchecked' }
+                                                onPress={() => setChecked('first')}
+                                            />
+                                    </View>
+                                    <View style={{flexDirection:'row', alignItems:'center'}}>
+                                        <Text style={{color:'white'}}>Yearly</Text>
+                                        <RadioButton
+                                            value="second"
+                                            color="#E5D3B3"
+                                            status={ checked === 'second' ? 'checked' : 'unchecked' }
+                                            onPress={() => setChecked('second')}
+                                        />
+                                    </View>
+                                    
                                 </View>
                                 <View style={{flexDirection:'row', alignItems:'center', marginTop: 10, marginLeft:30}}> 
                                     <Text style={{color: 'white'}}>Ownership Type</Text>
                                 </View>
-                                <View style={{flexDirection:'row', justifyContent:'center'}}>
+                                <View style={{flexDirection:'row', marginLeft:70}}>
                                     <View style={{flexDirection:'row', alignItems:'center'}}>
                                         <Text style={{color:'white'}}>Retailer</Text>
                                         <RadioButton
