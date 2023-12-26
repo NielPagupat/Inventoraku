@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StyleSheet, View } from "react-native";
-import { Avatar, Button, Card, Portal, Text, TextInput, Modal} from "react-native-paper";
+import { Avatar, Button, Card, Portal, Text, TextInput, Modal, RadioButton} from "react-native-paper";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function SignUp({ navigation }) {
@@ -9,11 +9,13 @@ export default function SignUp({ navigation }) {
 
     const showModal = () => SetVisible(true);
     const hideModal = () => SetVisible(false);
-    const containerStyle = {backgroundColor: 'white', height: '45%', margin: 40, borderRadius: 10};
+    const containerStyle = {backgroundColor: '#987554', height: 450, margin: 40, borderRadius: 10};
     
     const backToLogin = () => {
         navigation.goBack();
     }
+
+    const [checked, setChecked] = React.useState('first');
 
     return (
         <SafeAreaView style={styles.Content}>
@@ -26,55 +28,79 @@ export default function SignUp({ navigation }) {
                     </View>
                     <View>
                         <View style={styles.inputBoxes}>
-                            <TextInput mode="outlined" style={styles.textInputs} label="E-mail"/>
+                            <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.textInputs} label="E-mail"/>
                         </View>
                         <View style={styles.inputBoxes}>
-                            <TextInput mode="outlined" style={styles.textInputs} label="Password"/>
+                            <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.textInputs} label="Password"/>
                         </View>
                         <View style={styles.inputBoxes}>
-                            <TextInput mode="outlined" style={styles.textInputs} label="Re-enter Password"/>
+                            <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.textInputs} label="Re-enter Password"/>
                         </View>
                         <View style={styles.inputBoxes}>
-                            <TextInput mode="outlined" style={styles.textInputs} label="Last Name"/>
+                            <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.textInputs} label="Last Name"/>
                         </View>
                         <View style={{flexDirection: 'row', marginTop: 10}}>
                             <View style={{flex: 3}}>
-                                <TextInput mode="outlined" style={{height: 35}} label="First Name"/>
+                                <TextInput selectionColor='black' activeUnderlineColor="black" style={{backgroundColor:'white', borderTopLeftRadius:10, borderTopRightRadius:10, borderRadius:10, height:50}} label="First Name"/>
                             </View>
                             <View style={{flex: .1}}></View>
                             <View style={{flex: 1}}>
-                                <TextInput mode="outlined" style={{height: 35}} label="M.I."/>
+                                <TextInput selectionColor='black' activeUnderlineColor="black" style={{backgroundColor:'white', borderTopLeftRadius:10, borderTopRightRadius:10, borderRadius:10, height:50}} label="M.I."/>
                             </View>
                         </View>
                         <View style={styles.inputBoxes}>
-                            <TextInput mode="outlined" style={styles.textInputs} label="Address"/>
+                            <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.textInputs} label="Address"/>
                         </View>
                         <View style={{flexDirection: "row", justifyContent:'space-between', marginTop: 20}}>
-                            <Button onPress={backToLogin}> Back </Button>
-                            <Button mode="elevated" style={{width: '65%',}} onPress={showModal}> Next </Button>
+                            <Button textColor="white" onPress={backToLogin}> Back </Button>
+                            <Button mode="elevated" textColor="black" style={{width: '65%',}} onPress={showModal}> Next </Button>
                         </View>
                         <Portal>
                             <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
-                                <View style={{alignItems:'flex-start'}}>
-                                    <Button>
-                                        <Icon name="arrow-left" size={20}/>
+                                <View style={{alignItems:'flex-start', marginBottom: 10}}>
+                                    <Button textColor='white'style={{marginHorizontal:10}} onPress={hideModal}>
+                                        <Icon color={'white'} name="arrow-left" size={20}/>
                                     </Button>
                                 </View>
                                 <View>
-                                    <TextInput mode="outlined" style={styles.modalInputs} label="Business Name"/>
+                                    <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.modalInputs} label="Business Name"/>
                                 </View>
                                 <View>
-                                    <TextInput mode="outlined" style={styles.modalInputs} label="Business Address"/>
+                                    <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.modalInputs} label="Business Address"/>
                                 </View>
                                 <View>
-                                    <TextInput mode="outlined" style={styles.modalInputs} label="Business Permit Number"/>
+                                    <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.modalInputs} label="Business Permit Number"/>
                                 </View>
                                 <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
-                                    <Text>Payment Option</Text>
-                                    <TextInput mode="outlined" style={{height: 35, marginTop: 10, marginHorizontal:10, width:'45%'}}/>
+                                    <Text style={{color: 'white'}}>Payment Option</Text>
+                                    <TextInput activeUnderlineColor="black" style={{height: 35, marginTop: 10, marginHorizontal:10, width:'45%', backgroundColor:'white', borderTopLeftRadius:10, borderTopRightRadius:10, borderRadius:10}}/>
                                 </View>
-                                <View style={{alignItems:'center', marginTop: 30}}>
-                                    <Button mode="contained" style={{width: '50%'}}>Submit</Button>
+                                <View style={{flexDirection:'row', alignItems:'center', marginTop: 10, marginLeft:30}}> 
+                                    <Text style={{color: 'white'}}>Ownership Type</Text>
+                                </View>
+                                <View style={{flexDirection:'row', justifyContent:'center'}}>
+                                    <View style={{flexDirection:'row', alignItems:'center'}}>
+                                        <Text style={{color:'white'}}>Retailer</Text>
+                                        <RadioButton
+                                                value="first"
+                                                color="#E5D3B3"
+                                                status={ checked === 'first' ? 'checked' : 'unchecked' }
+                                                onPress={() => setChecked('first')}
+                                            />
+                                    </View>
+                                    <View style={{flexDirection:'row', alignItems:'center'}}>
+                                        <Text style={{color:'white'}}>Supplier</Text>
+                                        <RadioButton
+                                            value="second"
+                                            color="#E5D3B3"
+                                            status={ checked === 'second' ? 'checked' : 'unchecked' }
+                                            onPress={() => setChecked('second')}
+                                        />
+                                    </View>
+                                    
+                                </View>
+                                <View style={{alignItems:'center', marginTop: 20}}>
+                                    <Button mode="elevated" textColor="black" style={{width: '50%'}}>Submit</Button>
                                 </View>
                             </Modal>
                         </Portal>
@@ -98,15 +124,22 @@ const styles = StyleSheet.create({
         width: '80%',
     },
     textInputs: {
-        height: 35,
-        width: '100%'
+        backgroundColor:'white',
+        width: '100%',
+        borderTopLeftRadius:10,
+        borderTopRightRadius:10,
+        borderRadius:10,
+        height: 50
     },
     inputBoxes: {
         marginTop: 10,
     },
     modalInputs: {
         marginHorizontal: 20,
-        height: 35,
-        marginTop: 5
+        marginTop: 5,
+        backgroundColor: 'white',
+        borderTopLeftRadius:10,
+        borderTopRightRadius:10,
+        borderRadius:10
     }
 })
