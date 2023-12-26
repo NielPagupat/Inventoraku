@@ -54,7 +54,7 @@ export default function POS() {
   return (
     <SafeAreaView style={{flex:1}}>
         <View><TopNavigation /></View>
-        <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+        <View style={{flex:2, justifyContent:'center', alignItems:'center'}}>
             <BarCodeScanner
                     onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
                     style={StyleSheet.absoluteFillObject}/>
