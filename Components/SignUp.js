@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { StyleSheet, View } from "react-native";
 import { Avatar, Button, Card, Portal, Text, TextInput, Modal} from "react-native-paper";
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import axios from "axios";
 export default function SignUp({ navigation }) {
     const [visible, SetVisible] = useState(false);
 
@@ -15,6 +15,23 @@ export default function SignUp({ navigation }) {
         navigation.goBack();
     }
 
+    const [email, setEmail] = useState();
+    const [passwd, setPasswd] = useState();
+    const [passwdConfirm, setPasswdConfirm] = useState();
+    const [fname, setFname] = useState();
+    const [lname, setLname] = useState();
+    const [mi, setMI] = useState();
+    const [address, setAddress] = useState();
+    const [bname, setBname] = useState();
+    const [baddress, setBaddress] = useState();
+    const [payOpt, setPayopt] = useState();
+    const [ownType, setOwntype] = useState();
+
+    const register = async () => {
+        const reg = await axios.post('http://10.0.254.12:8000/api/register')
+
+        alert(reg.data.status)
+    }
     return (
         <SafeAreaView style={styles.Content}>
             <Avatar.Image size={100} source={require('../assets/StoreIO_Logo.png')} style={{marginBottom: 20, backgroundColor:'rgba(0,0,0,0)'}}/>
