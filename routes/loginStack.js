@@ -30,7 +30,6 @@ const screens = {
             headerShown: false
         }
     },
-
     Inventory:{
         screen: Inventory,
         navigationOptions: {

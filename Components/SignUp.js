@@ -6,6 +6,30 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import axios, { AxiosHeaders } from "axios";
 
 export default function SignUp({ navigation }) {
+    const [pVisibility, setPVisibility] = useState(true)
+    const [eyeIcon, setIcon] = useState('eye-off')
+    const showPass = () => {
+        if (pVisibility == true) {
+            setPVisibility(false)
+            setIcon('eye')
+        } else {
+            setPVisibility(true)
+            setIcon('eye-off')
+        }
+    }
+
+    const [rePassVisible, setRePassVisible] = useState(true)
+    const [reEyeIcon, setReEyeIcon] = useState('eye-off')
+    const showRePass = () => {
+        if (rePassVisible == true) {
+            setRePassVisible(false)
+            setReEyeIcon('eye')
+        } else {
+            setRePassVisible(true)
+            setReEyeIcon('eye-off')
+        }
+    }
+
     const [visible, SetVisible] = useState(false);
 
     const showModal = () => SetVisible(true);
@@ -71,7 +95,7 @@ export default function SignUp({ navigation }) {
 
     return (
         <SafeAreaView style={styles.Content}>
-            <Avatar.Image size={100} source={require('../assets/StoreIO_Logo.png')} style={{marginBottom: 20, backgroundColor:'rgba(0,0,0,0)'}}/>
+            <Avatar.Image size={150} source={require('../assets/StoreIO_Logo.png')} style={{marginBottom: 20, backgroundColor:'rgba(0,0,0,0)'}}/>
             <View style={styles.view}>
                 <Card style={{backgroundColor:'#987554'}}>
                 <Card.Content>
@@ -80,28 +104,28 @@ export default function SignUp({ navigation }) {
                     </View>
                     <View>
                         <View style={styles.inputBoxes}>
-                            <TextInput selectionColor="black" underlineColor="transparent" style={styles.textInputs} label="E-mail" onChangeText={setEmail}/>
+                            <TextInput selectionColor="black" underlineColor="transparent" activeUnderlineColor="#987554" style={styles.textInputs} label="E-mail" onChangeText={setEmail}/>
                         </View>
                         <View style={styles.inputBoxes}>
-                            <TextInput selectionColor="black" underlineColor="transparent" style={styles.textInputs} label="Password" onChangeText={setPasswd}/>
+                            <TextInput selectionColor="black" underlineColor="transparent" activeUnderlineColor="#987554" style={styles.textInputs} label="Password" onChangeText={setPasswd} secureTextEntry={pVisibility}  right={<TextInput.Icon icon={eyeIcon} onPress={showPass}/>}/>
                         </View>
                         <View style={styles.inputBoxes}>
-                            <TextInput selectionColor="black" underlineColor="transparent" style={styles.textInputs} label="Re-enter Password" onChangeText={setPasswdConfirm}/>
+                            <TextInput selectionColor="black" underlineColor="transparent" activeUnderlineColor="#987554" style={styles.textInputs} label="Re-enter Password" onChangeText={setPasswdConfirm} secureTextEntry={rePassVisible}  right={<TextInput.Icon icon={reEyeIcon} onPress={showRePass}/>}/>
                         </View>
                         <View style={styles.inputBoxes}>
-                            <TextInput selectionColor="black" underlineColor="transparent" style={styles.textInputs} label="Last Name" onChangeText={setLname}/>
+                            <TextInput selectionColor="black" underlineColor="transparent" activeUnderlineColor="#987554" style={styles.textInputs} label="Last Name" onChangeText={setLname}/>
                         </View>
                         <View style={{flexDirection: 'row', marginTop: 10}}>
                             <View style={{flex: 3}}>
-                                <TextInput selectionColor="black" underlineColor="transparent" style={{backgroundColor:'white', borderTopLeftRadius:10, borderTopRightRadius:10, borderRadius:10, height:50}} label="First Name" onChangeText={setFname}/>
+                                <TextInput selectionColor="black" underlineColor="transparent" activeUnderlineColor="#987554" style={{backgroundColor:'white', borderTopLeftRadius:10, borderTopRightRadius:10, borderRadius:10, height:50}} label="First Name" onChangeText={setFname}/>
                             </View>
                             <View style={{flex: .1}}></View>
                             <View style={{flex: 1}}>
-                                <TextInput selectionColor="black" underlineColor="transparent" style={{backgroundColor:'white', borderTopLeftRadius:10, borderTopRightRadius:10, borderRadius:10, height:50}} label="M.I." onChangeText={setMI}/>
+                                <TextInput selectionColor="black" underlineColor="transparent" activeUnderlineColor="#987554" style={{backgroundColor:'white', borderTopLeftRadius:10, borderTopRightRadius:10, borderRadius:10, height:50}} label="M.I." onChangeText={setMI}/>
                             </View>
                         </View>
                         <View style={styles.inputBoxes}>
-                            <TextInput selectionColor="black" underlineColor="transparent" style={styles.textInputs} label="Address" onChangeText={setAddress}/>
+                            <TextInput selectionColor="black" underlineColor="transparent" activeUnderlineColor="#987554" style={styles.textInputs} label="Address" onChangeText={setAddress}/>
                         </View>
                         <View style={{flexDirection: "row", justifyContent:'space-between', alignItems:'center', marginTop: 20, marginHorizontal:10}}>
                             <TouchableOpacity style={{flexDirection:'row', justifyContent:'space-between', width:60}} onPress={backToLogin}>
@@ -121,13 +145,13 @@ export default function SignUp({ navigation }) {
                                     </Button>
                                 </View>
                                 <View>
-                                    <TextInput selectionColor="black" underlineColor="transparent" style={styles.modalInputs} label="Business Name" onChangeText={setBname}/>
+                                    <TextInput selectionColor="black" underlineColor="transparent" activeUnderlineColor="#987554" style={styles.modalInputs} label="Business Name" onChangeText={setBname}/>
                                 </View>
                                 <View>
-                                    <TextInput selectionColor="black" underlineColor="transparent" style={styles.modalInputs} label="Business Address" onChangeText={setBaddress}/>
+                                    <TextInput selectionColor="black" underlineColor="transparent" activeUnderlineColor="#987554" style={styles.modalInputs} label="Business Address" onChangeText={setBaddress}/>
                                 </View>
                                 <View>
-                                    <TextInput selectionColor="black" underlineColor="transparent" style={styles.modalInputs} label="Business Permit Number" onChangeText={setBpermit}/>
+                                    <TextInput selectionColor="black" underlineColor="transparent" activeUnderlineColor="#987554" style={styles.modalInputs} label="Business Permit Number" onChangeText={setBpermit}/>
                                 </View>
                                 <View style={{flexDirection:'row', alignItems:'center', marginTop: 10, marginLeft:30}}> 
                                     <Text style={{color: 'white'}}>Payment Options</Text>
@@ -171,7 +195,7 @@ export default function SignUp({ navigation }) {
                                         <RadioButton
                                             value="Supplier"
                                             color="#E5D3B3"
-                                            status={ ownType === 'second' ? 'checked' : 'unchecked' }
+                                            status={ ownType === 'Supplier' ? 'checked' : 'unchecked' }
                                             onPress={() => setOwntype('Supplier')}
                                         />
                                     </View>

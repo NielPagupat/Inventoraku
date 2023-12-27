@@ -54,8 +54,8 @@ export default function Login({ navigation }) {
         <View style={styles.view}>
             <Card style={{backgroundColor:'#987554'}}>
                 <Card.Content>
-                    <TextInput label="E-mail" keyboardType='email-address' onChangeText={setEmail}></TextInput>
-                    <TextInput label="Password" secureTextEntry={pVisibility} style={{marginTop:10}} onChangeText={setPassword} right={<TextInput.Icon icon={eyeIcon} onPress={showPass}/>}/>
+                    <TextInput style={{backgroundColor:'white'}} label="E-mail" activeUnderlineColor='#987554' keyboardType='email-address' onChangeText={setEmail}></TextInput>
+                    <TextInput style={{marginTop:10, backgroundColor:'white'}} label="Password" activeUnderlineColor='#987554' secureTextEntry={pVisibility}  onChangeText={setPassword} right={<TextInput.Icon icon={eyeIcon} onPress={showPass}/>}/>
                     <Button textColor='white' style={{alignSelf:'flex-end'}}>Forgot Password?</Button>
                     <Button buttonColor='#E5D3B3' textColor='black' mode='contained' onPress={logIn}>Log-in</Button>
                     <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center', marginTop: 10}}>
