@@ -4,6 +4,7 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Avatar, Button, Card, Portal, Text, TextInput, Modal, RadioButton} from "react-native-paper";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import axios from "axios";
+
 export default function SignUp({ navigation }) {
     const [visible, SetVisible] = useState(false);
 
