@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Avatar, Button, Card, Portal, Text, TextInput, Modal, RadioButton} from "react-native-paper";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import axios from "axios";
+import axios, { AxiosHeaders } from "axios";
 
 export default function SignUp({ navigation }) {
     const [visible, SetVisible] = useState(false);
@@ -26,16 +26,48 @@ export default function SignUp({ navigation }) {
     const [address, setAddress] = useState();
     const [bname, setBname] = useState();
     const [baddress, setBaddress] = useState();
+    const [bpermit, setBpermit] = useState();
     const [payOpt, setPayopt] = useState();
     const [ownType, setOwntype] = useState();
 
     const register = async () => {
-        const reg = await axios.post('http://10.0.254.12:8000/api/register')
-
-        alert(reg.data.status)
+        
+        const reg = await axios.post('http://10.0.254.12:8000/api/register', {
+            "Email": email,
+            "Password": passwd,
+            "Fname": fname,
+            "Lname": lname,
+            "MI": mi,
+            "Addr": address,
+            "Bname": bname,
+            "Baddress": baddress,
+            "Payopt": payOpt,
+            "OwnType": ownType,
+            "Bpermit": bpermit
+        }, {headers:{'Content-Type': 'application/json'}}).then(function (response){
+            if (response.status == 200) {
+                alert('Successfull Registration')
+            } else {
+                alert('registration failed')
+            }
+        })
     }
 
-    const [checked, setChecked] = useState('');
+    const submitData = () => {
+        console.log({
+            "email": email,
+            "password": passwd,
+            "fname": fname,
+            "lname": lname,
+            "mi": mi,
+            "addr": address,
+            "bname": bname,
+            "baddress": baddress,
+            "PayOpt": payOpt,
+            "ownType": ownType,
+            "bpermit": bpermit
+        })
+    }
 
     return (
         <SafeAreaView style={styles.Content}>
@@ -48,28 +80,28 @@ export default function SignUp({ navigation }) {
                     </View>
                     <View>
                         <View style={styles.inputBoxes}>
-                            <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.textInputs} label="E-mail"/>
+                            <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.textInputs} label="E-mail" onChangeText={setEmail}/>
                         </View>
                         <View style={styles.inputBoxes}>
-                            <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.textInputs} label="Password"/>
+                            <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.textInputs} label="Password" onChangeText={setPasswd}/>
                         </View>
                         <View style={styles.inputBoxes}>
-                            <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.textInputs} label="Re-enter Password"/>
+                            <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.textInputs} label="Re-enter Password" onChangeText={setPasswdConfirm}/>
                         </View>
                         <View style={styles.inputBoxes}>
-                            <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.textInputs} label="Last Name"/>
+                            <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.textInputs} label="Last Name" onChangeText={setLname}/>
                         </View>
                         <View style={{flexDirection: 'row', marginTop: 10}}>
                             <View style={{flex: 3}}>
-                                <TextInput selectionColor='black' activeUnderlineColor="black" style={{backgroundColor:'white', borderTopLeftRadius:10, borderTopRightRadius:10, borderRadius:10, height:50}} label="First Name"/>
+                                <TextInput selectionColor='black' activeUnderlineColor="black" style={{backgroundColor:'white', borderTopLeftRadius:10, borderTopRightRadius:10, borderRadius:10, height:50}} label="First Name" onChangeText={setFname}/>
                             </View>
                             <View style={{flex: .1}}></View>
                             <View style={{flex: 1}}>
-                                <TextInput selectionColor='black' activeUnderlineColor="black" style={{backgroundColor:'white', borderTopLeftRadius:10, borderTopRightRadius:10, borderRadius:10, height:50}} label="M.I."/>
+                                <TextInput selectionColor='black' activeUnderlineColor="black" style={{backgroundColor:'white', borderTopLeftRadius:10, borderTopRightRadius:10, borderRadius:10, height:50}} label="M.I." onChangeText={setMI}/>
                             </View>
                         </View>
                         <View style={styles.inputBoxes}>
-                            <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.textInputs} label="Address"/>
+                            <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.textInputs} label="Address" onChangeText={setAddress}/>
                         </View>
                         <View style={{flexDirection: "row", justifyContent:'space-between', alignItems:'center', marginTop: 20, marginHorizontal:10}}>
                             <TouchableOpacity style={{flexDirection:'row', justifyContent:'space-between', width:60}} onPress={backToLogin}>
@@ -89,13 +121,13 @@ export default function SignUp({ navigation }) {
                                     </Button>
                                 </View>
                                 <View>
-                                    <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.modalInputs} label="Business Name"/>
+                                    <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.modalInputs} label="Business Name" onChangeText={setBname}/>
                                 </View>
                                 <View>
-                                    <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.modalInputs} label="Business Address"/>
+                                    <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.modalInputs} label="Business Address" onChangeText={setBaddress}/>
                                 </View>
                                 <View>
-                                    <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.modalInputs} label="Business Permit Number"/>
+                                    <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.modalInputs} label="Business Permit Number" onChangeText={setBpermit}/>
                                 </View>
                                 <View style={{flexDirection:'row', alignItems:'center', marginTop: 10, marginLeft:30}}> 
                                     <Text style={{color: 'white'}}>Payment Options</Text>
@@ -104,19 +136,19 @@ export default function SignUp({ navigation }) {
                                     <View style={{flexDirection:'row', alignItems:'center'}}>
                                         <Text style={{color:'white'}}>Monthly</Text>
                                         <RadioButton
-                                                value="first"
+                                                value="Monthly"
                                                 color="#E5D3B3"
-                                                status={ checked === 'first' ? 'checked' : 'unchecked' }
-                                                onPress={() => setChecked('first')}
+                                                status={ payOpt === 'Monthly' ? 'checked' : 'unchecked' }
+                                                onPress={() => setPayopt('Monthly')}
                                             />
                                     </View>
                                     <View style={{flexDirection:'row', alignItems:'center'}}>
                                         <Text style={{color:'white'}}>Yearly</Text>
                                         <RadioButton
-                                            value="second"
+                                            value="Yearly"
                                             color="#E5D3B3"
-                                            status={ checked === 'second' ? 'checked' : 'unchecked' }
-                                            onPress={() => setChecked('second')}
+                                            status={ payOpt === 'Yearly' ? 'checked' : 'unchecked' }
+                                            onPress={() => setPayopt('Yearly')}
                                         />
                                     </View>
                                     
@@ -128,25 +160,25 @@ export default function SignUp({ navigation }) {
                                     <View style={{flexDirection:'row', alignItems:'center'}}>
                                         <Text style={{color:'white'}}>Retailer</Text>
                                         <RadioButton
-                                                value="first"
+                                                value="Retailer"
                                                 color="#E5D3B3"
-                                                status={ checked === 'first' ? 'checked' : 'unchecked' }
-                                                onPress={() => setChecked('first')}
+                                                status={ ownType === 'Retailer' ? 'checked' : 'unchecked' }
+                                                onPress={() => setOwntype('Retailer')}
                                             />
                                     </View>
                                     <View style={{flexDirection:'row', alignItems:'center'}}>
                                         <Text style={{color:'white'}}>Supplier</Text>
                                         <RadioButton
-                                            value="second"
+                                            value="Supplier"
                                             color="#E5D3B3"
-                                            status={ checked === 'second' ? 'checked' : 'unchecked' }
-                                            onPress={() => setChecked('second')}
+                                            status={ ownType === 'second' ? 'checked' : 'unchecked' }
+                                            onPress={() => setOwntype('Supplier')}
                                         />
                                     </View>
                                     
                                 </View>
                                 <View style={{alignItems:'center', marginTop: 20}}>
-                                    <Button mode="elevated" textColor="black" style={{width: '50%'}}>Submit</Button>
+                                    <Button mode="elevated" textColor="black" style={{width: '50%'}} onPress={register}>Submit</Button>
                                 </View>
                             </Modal>
                         </Portal>

@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import TopNavigation from '../NavigationBars/TopNavigation'
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
-export default function POS() {
+export default function POS({navigation}) {
     const [total, setTotal] = useState('0');
     const [productID, setProductID] = useState();
     const add = () => {
@@ -53,7 +53,7 @@ export default function POS() {
     
   return (
     <SafeAreaView style={{flex:1}}>
-        <View><TopNavigation /></View>
+        <View><TopNavigation Navigation={navigation}/></View>
         <View style={{flex:2, justifyContent:'center', alignItems:'center'}}>
             <BarCodeScanner
                     onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
@@ -97,7 +97,7 @@ export default function POS() {
             </Card>
         </View>
         <View>
-            <BottomNavigation />
+            <BottomNavigation Navigation={navigation}/>
         </View>
     </SafeAreaView>
   )

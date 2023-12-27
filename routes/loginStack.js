@@ -4,6 +4,7 @@ import Login from "../Components/Login";
 import SignUp from "../Components/SignUp"
 import Dashboard from "../Components/Dashboard";
 import POS from "../Components/POS";
+import Inventory from "../Components/Inventory";
 const screens = {
     Login: {
         screen: Login,
@@ -25,6 +26,13 @@ const screens = {
     },
     POS:{
         screen: POS,
+        navigationOptions: {
+            headerShown: false
+        }
+    },
+
+    Inventory:{
+        screen: Inventory,
         navigationOptions: {
             headerShown: false
         }

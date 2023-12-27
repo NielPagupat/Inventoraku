@@ -25,24 +25,24 @@ export default function Login({ navigation }) {
     const [password, setPassword] = useState()
     
     const logIn = async () => {
-        /*const result = await axios.get('http://10.0.254.12:8000/api/login', {
+        const result = await axios.get('http://10.0.254.12:8000/api/login', {
             params:{
                 "Email": email,
                 "Password": password
             }  
         })
         if (result.data.match == false) {
-            console.log('invalid email')
+            console.log('invalid email') 
         } else {
             if (password == result.data.password[0].password) {
                 console.log('logged in')
+                navigation.navigate('Dashboard',{Email:email})
             } else {
                 console.log('invalid password')
             }
         }     
-        }*/
+        
 
-        navigation.navigate('Dashboard')
     }
 
   return (
