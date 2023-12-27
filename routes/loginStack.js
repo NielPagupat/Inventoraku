@@ -8,7 +8,7 @@ import POS from "../Components/POS";
 import Inventory from "../Components/Inventory";
 import AddProduct from "../Components/AddProduct";
 const Stack = createStackNavigator();
-asdasda
+
 const App = () => {
   return (
     <NavigationContainer>
