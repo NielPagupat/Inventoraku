@@ -1,11 +1,11 @@
 import React from 'react'
 import { Provider as PaperProvider } from 'react-native-paper'
-import LoginStack from '../routes/loginStack'
+import App from '../routes/loginStack'
 
 export default function Index() {
   return (
     <PaperProvider>
-        <LoginStack/>
+        <App />
     </PaperProvider>
   )
 }

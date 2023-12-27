@@ -1,52 +1,27 @@
-import { createStackNavigator } from "react-navigation-stack";
-import { createAppContainer } from "react-navigation";
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import Login from "../Components/Login";
 import SignUp from "../Components/SignUp"
 import Dashboard from "../Components/Dashboard";
 import POS from "../Components/POS";
 import Inventory from "../Components/Inventory";
 import AddProduct from "../Components/AddProduct";
-const screens = {
-    Login: {
-        screen: Login,
-        navigationOptions: {
-            headerShown: false
-        }
-    },
-    SignUp: {
-        screen: SignUp,
-        navigationOptions: {
-            headerShown: false
-        }
-    },
-    Dashboard:{
-        screen: Dashboard,
-        navigationOptions: {
-            headerShown: false
-        }
-    },
-    POS:{
-        screen: POS,
-        navigationOptions: {
-            headerShown: false
-        }
-    },
+const Stack = createStackNavigator();
 
-    Inventory:{
-        screen: Inventory,
-        navigationOptions: {
-            headerShown: false
-        }
-    },
-    AddProduct:{
-        screen: AddProduct,
-        navigationOptions: {
-            headerShown: false
-        }
-    }
-    
-}
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={Login}  options={{ headerShown: false }}/>
+        <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }}/>
+        <Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }}/>
+        <Stack.Screen name="POS" component={POS} options={{ headerShown: false }}/>
+        <Stack.Screen name="Inventory" component={Inventory} options={{ headerShown: false }}/>
+        <Stack.Screen name="AddProduct" component={AddProduct} options={{ headerShown: false }}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
-const AppStack = createStackNavigator(screens);
-
-export default createAppContainer(AppStack);
+export default App;

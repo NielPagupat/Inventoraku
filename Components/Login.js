@@ -3,8 +3,11 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { Card, Text, TextInput, Button, Avatar, useTheme } from 'react-native-paper'
 import { StyleSheet, View } from 'react-native'
 import axios from 'axios'
+import { useNavigation } from '@react-navigation/native'
 
-export default function Login({ navigation }) {
+export default function Login() {
+    const navigation = useNavigation()
+
     const [pVisibility, setPVisibility] = useState(true)
     const [eyeIcon, setIcon] = useState('eye-off')
     const showPass = () => {
@@ -36,7 +39,8 @@ export default function Login({ navigation }) {
         } else {
             if (password == result.data.password[0].password) {
                 console.log('logged in')
-                navigation.navigate('Dashboard',{Email:email})
+                // const Email = email
+                navigation.navigate('Dashboard',{ email })
             } else {
                 console.log('invalid password')
             }

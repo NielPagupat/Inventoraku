@@ -5,9 +5,14 @@ import { Button } from 'react-native-paper';
 import TopNavigation from '../NavigationBars/TopNavigation';
 import BottomNavigation from '../NavigationBars/BottomNavigation';
 import axios from 'axios';
-export default function Dashboard({navigation}) {
+import { useNavigation, useRoute } from '@react-navigation/native';
+export default function Dashboard() {
+  const navigation = useNavigation()
+  const route = useRoute()
+  const {email} = route.params
+
   const [userData, setUserData] = useState([])
-  const [userEmail, setUserEmail] = useState(navigation.getParam('Email'))
+  const [userEmail, setUserEmail] = useState(email)
   
   const getData = async () => {
     try {
@@ -23,10 +28,10 @@ export default function Dashboard({navigation}) {
   }, []);
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{width:'100%'}}><TopNavigation Navigation = {navigation}/></View>
+      <View style={{width:'100%'}}><TopNavigation Email = {email}/></View>
       <View style={styles.content}><Text>{userData.id}</Text></View>
       <View></View>
-      <View style={{width:'100%'}}><BottomNavigation Navigation = {navigation} /></View>
+      <View style={{width:'100%'}}><BottomNavigation Email = {email} /></View>
     </SafeAreaView>
   );
 }
