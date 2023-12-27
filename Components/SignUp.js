@@ -4,7 +4,9 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Avatar, Button, Card, Portal, Text, TextInput, Modal, RadioButton} from "react-native-paper";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import axios, { AxiosHeaders } from "axios";
-export default function SignUp({ navigation }) {
+import { useNavigation } from "@react-navigation/native";
+export default function SignUp() {
+    const navigation = useNavigation()
     const [visible, SetVisible] = useState(false);
 
     const showModal = () => SetVisible(true);
@@ -12,7 +14,7 @@ export default function SignUp({ navigation }) {
     const containerStyle = {backgroundColor: '#987554', height: 450, margin: 40, borderRadius: 10};
     
     const backToLogin = () => {
-        navigation.goBack();
+        navigation.navigate('Login');
     }
 
 
