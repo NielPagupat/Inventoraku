@@ -61,7 +61,7 @@ export default function AddProduct() {
             </View>
             <View>
                 <Text>user ID: {UID}</Text>
-                <TextInput label={'Product ID'} value={productID} right={<TextInput.Icon icon={'undo'} onPress={reset}/>}/>
+                <TextInput label={'Product ID'} value={productID} onChangeText={setProductID} right={<TextInput.Icon icon={'undo'} onPress={reset}/>}/>
                 <TextInput label={'Product Name'} onChangeText={setPname}/>
                 <TextInput label={'Product Stock'} onChangeText={setPstock}/>
                 <TextInput label={'Product Capital Price'} onChangeText={setPCP}/>
