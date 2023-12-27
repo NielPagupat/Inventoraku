@@ -14,7 +14,9 @@ export default function Dashboard({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={{width:'100%'}}><TopNavigation Navigation = {navigation}/></View>
-      <View style={styles.content}></View>
+      <View style={styles.content}>
+
+      </View>
       <View style={{width:'100%'}}><BottomNavigation Navigation = {navigation}/></View>
     </SafeAreaView>
   );
@@ -26,6 +28,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#FFFBF3'
   },
   content:{
     flex:1

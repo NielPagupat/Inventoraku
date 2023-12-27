@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Card, Text, TextInput, Button, Avatar, useTheme } from 'react-native-paper'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import axios from 'axios'
 
 export default function Login({ navigation }) {
@@ -48,19 +48,21 @@ export default function Login({ navigation }) {
   return (
     <SafeAreaView style={styles.Content}>
         <View style={{marginBottom: 50, alignItems:'center'}}>
-            <Avatar.Image size={100} source={require('../assets/StoreIO_Logo.png')} style={{backgroundColor:'rgba(0,0,0,0)'}}/>
-            <Text style={{marginTop: 20, fontSize: 30}}>Inventoraku</Text>
+            <Avatar.Image size={200} source={require('../assets/StoreIO_Logo.png')} style={{backgroundColor:'rgba(0,0,0,0)', marginLeft:5}}/>
+            <Text style={{fontSize: 30}}>Inventoraku</Text>
         </View>
         <View style={styles.view}>
             <Card style={{backgroundColor:'#987554'}}>
                 <Card.Content>
-                    <TextInput label= "E-mail" keyboardType='email-address' onChangeText={setEmail}></TextInput>
+                    <TextInput label="E-mail" keyboardType='email-address' onChangeText={setEmail}></TextInput>
                     <TextInput label="Password" secureTextEntry={pVisibility} style={{marginTop:10}} onChangeText={setPassword} right={<TextInput.Icon icon={eyeIcon} onPress={showPass}/>}/>
                     <Button textColor='white' style={{alignSelf:'flex-end'}}>Forgot Password?</Button>
                     <Button buttonColor='#E5D3B3' textColor='black' mode='contained' onPress={logIn}>Log-in</Button>
                     <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center', marginTop: 10}}>
                         <Text>Don't have an account?</Text>
-                        <Button textColor='white' onPress={toSignUp}>Sign-up</Button>
+                        <TouchableOpacity>
+                            <Text style={{color:'white', margin: 10, fontWeight:'bold'}} onPress={toSignUp}>Sign-up</Text>
+                        </TouchableOpacity>
                     </View>
                 </Card.Content>
             </Card>

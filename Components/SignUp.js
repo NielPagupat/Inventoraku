@@ -80,28 +80,28 @@ export default function SignUp({ navigation }) {
                     </View>
                     <View>
                         <View style={styles.inputBoxes}>
-                            <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.textInputs} label="E-mail" onChangeText={setEmail}/>
+                            <TextInput selectionColor="black" underlineColor="transparent" style={styles.textInputs} label="E-mail" onChangeText={setEmail}/>
                         </View>
                         <View style={styles.inputBoxes}>
-                            <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.textInputs} label="Password" onChangeText={setPasswd}/>
+                            <TextInput selectionColor="black" underlineColor="transparent" style={styles.textInputs} label="Password" onChangeText={setPasswd}/>
                         </View>
                         <View style={styles.inputBoxes}>
-                            <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.textInputs} label="Re-enter Password" onChangeText={setPasswdConfirm}/>
+                            <TextInput selectionColor="black" underlineColor="transparent" style={styles.textInputs} label="Re-enter Password" onChangeText={setPasswdConfirm}/>
                         </View>
                         <View style={styles.inputBoxes}>
-                            <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.textInputs} label="Last Name" onChangeText={setLname}/>
+                            <TextInput selectionColor="black" underlineColor="transparent" style={styles.textInputs} label="Last Name" onChangeText={setLname}/>
                         </View>
                         <View style={{flexDirection: 'row', marginTop: 10}}>
                             <View style={{flex: 3}}>
-                                <TextInput selectionColor='black' activeUnderlineColor="black" style={{backgroundColor:'white', borderTopLeftRadius:10, borderTopRightRadius:10, borderRadius:10, height:50}} label="First Name" onChangeText={setFname}/>
+                                <TextInput selectionColor="black" underlineColor="transparent" style={{backgroundColor:'white', borderTopLeftRadius:10, borderTopRightRadius:10, borderRadius:10, height:50}} label="First Name" onChangeText={setFname}/>
                             </View>
                             <View style={{flex: .1}}></View>
                             <View style={{flex: 1}}>
-                                <TextInput selectionColor='black' activeUnderlineColor="black" style={{backgroundColor:'white', borderTopLeftRadius:10, borderTopRightRadius:10, borderRadius:10, height:50}} label="M.I." onChangeText={setMI}/>
+                                <TextInput selectionColor="black" underlineColor="transparent" style={{backgroundColor:'white', borderTopLeftRadius:10, borderTopRightRadius:10, borderRadius:10, height:50}} label="M.I." onChangeText={setMI}/>
                             </View>
                         </View>
                         <View style={styles.inputBoxes}>
-                            <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.textInputs} label="Address" onChangeText={setAddress}/>
+                            <TextInput selectionColor="black" underlineColor="transparent" style={styles.textInputs} label="Address" onChangeText={setAddress}/>
                         </View>
                         <View style={{flexDirection: "row", justifyContent:'space-between', alignItems:'center', marginTop: 20, marginHorizontal:10}}>
                             <TouchableOpacity style={{flexDirection:'row', justifyContent:'space-between', width:60}} onPress={backToLogin}>
@@ -121,13 +121,13 @@ export default function SignUp({ navigation }) {
                                     </Button>
                                 </View>
                                 <View>
-                                    <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.modalInputs} label="Business Name" onChangeText={setBname}/>
+                                    <TextInput selectionColor="black" underlineColor="transparent" style={styles.modalInputs} label="Business Name" onChangeText={setBname}/>
                                 </View>
                                 <View>
-                                    <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.modalInputs} label="Business Address" onChangeText={setBaddress}/>
+                                    <TextInput selectionColor="black" underlineColor="transparent" style={styles.modalInputs} label="Business Address" onChangeText={setBaddress}/>
                                 </View>
                                 <View>
-                                    <TextInput selectionColor='black' activeUnderlineColor="black" style={styles.modalInputs} label="Business Permit Number" onChangeText={setBpermit}/>
+                                    <TextInput selectionColor="black" underlineColor="transparent" style={styles.modalInputs} label="Business Permit Number" onChangeText={setBpermit}/>
                                 </View>
                                 <View style={{flexDirection:'row', alignItems:'center', marginTop: 10, marginLeft:30}}> 
                                     <Text style={{color: 'white'}}>Payment Options</Text>
