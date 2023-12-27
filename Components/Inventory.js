@@ -1,10 +1,14 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-
-export default function Inventory() {
+import { SafeAreaView } from 'react-native-safe-area-context'
+import TopNavigation from '../NavigationBars/TopNavigation'
+import BottomNavigation from '../NavigationBars/BottomNavigation'
+export default function Inventory({navigation}) {
   return (
-    <View>
-      <Text>Inventory</Text>
-    </View>
+    <SafeAreaView style={{flex:1}}>
+      <View><TopNavigation Navigation={navigation}/></View>
+      <View style={{flex:1}}><Text>Push</Text></View>
+      <View><BottomNavigation Navigation={navigation}/></View>
+    </SafeAreaView>
   )
 }
