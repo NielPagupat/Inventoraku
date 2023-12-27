@@ -24,9 +24,9 @@ export default function Dashboard({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={{width:'100%'}}><TopNavigation Navigation = {navigation}/></View>
-      <View style={styles.content}><Text>{userData.firstname}</Text></View>
+      <View style={styles.content}><Text>{userData.id}</Text></View>
       <View></View>
-      <View style={{width:'100%'}}><BottomNavigation Navigation = {navigation}/></View>
+      <View style={{width:'100%'}}><BottomNavigation Navigation = {navigation} /></View>
     </SafeAreaView>
   );
 }
