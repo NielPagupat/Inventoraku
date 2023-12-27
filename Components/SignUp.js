@@ -56,7 +56,7 @@ export default function SignUp({ navigation }) {
 
     const register = async () => {
         
-        const reg = await axios.post('http://10.0.254.12:8000/api/register', {
+        const reg = await axios.post('http://192.168.1.5:8000/api/register', {
             "Email": email,
             "Password": passwd,
             "Fname": fname,

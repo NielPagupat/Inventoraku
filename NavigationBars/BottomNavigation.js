@@ -13,7 +13,7 @@ export default function BottomNavigation({ Email }) {
         navigation.navigate('POS',{email})
     }
     const goToInventory = async () => {
-        const getUserID = await axios.get('http://10.0.254.12:8000/api/getUdata', { params: { 'Email': email } })
+        const getUserID = await axios.get('http://192.168.1.5:8000/api/getUdata', { params: { 'Email': email } })
         const userID = getUserID.data.userData[0].id
         navigation.navigate('Inventory',{email, userID})
         

@@ -24,7 +24,7 @@ export default function AddProduct() {
 
 
     const addProduct = async () =>{
-        const result = await axios.post('http://10.0.254.12:8000/api/addProduct', {
+        const result = await axios.post('http://192.168.1.5:8000/api/addProduct', {
             'UID': UID,
             'PID': productID,
             'Pname': pname,

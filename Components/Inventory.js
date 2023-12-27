@@ -17,7 +17,7 @@ export default function Inventory() {
   
   useEffect(()=>{
     const get = async () =>{
-      const all = await axios.get('http://10.0.254.12:8000/api/getProduct',{params:{
+      const all = await axios.get('http://192.168.1.5:8000/api/getProduct',{params:{
         'userID': userID
       }})
       SetAllProducts(all.data.userData)

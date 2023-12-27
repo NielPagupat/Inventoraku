@@ -28,7 +28,7 @@ export default function Login() {
     const [password, setPassword] = useState()
     
     const logIn = async () => {
-        const result = await axios.get('http://10.0.254.12:8000/api/login', {
+        const result = await axios.get('http://192.168.1.5:8000/api/login', {
             params:{
                 "Email": email,
                 "Password": password
