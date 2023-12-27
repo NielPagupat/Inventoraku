@@ -170,7 +170,7 @@ export default function SignUp({ navigation }) {
                                         <RadioButton
                                             value="Supplier"
                                             color="#E5D3B3"
-                                            status={ ownType === 'second' ? 'checked' : 'unchecked' }
+                                            status={ ownType === 'Supplier' ? 'checked' : 'unchecked' }
                                             onPress={() => setOwntype('Supplier')}
                                         />
                                     </View>
