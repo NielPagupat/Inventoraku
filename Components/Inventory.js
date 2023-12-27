@@ -19,7 +19,7 @@ export default function Inventory({navigation}) {
     }
     get()
     console.log(allProducts)
-  },[])
+  },[navigation])
 
   const showUID = () => {
     console.log(navigation.getParam('Userid'))
@@ -30,7 +30,7 @@ export default function Inventory({navigation}) {
   return (
     <SafeAreaView style={{flex:1}}>
       <View><TopNavigation Navigation={navigation}/></View>
-      <View style={{flex:1}}>
+      <View style={{flex:1, width:'100%'}}>
         <MyDataTable products={ allProducts } />
       </View>
       <View style={{flexDirection:'row', width:'100%', justifyContent:'space-around'}}>
