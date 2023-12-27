@@ -5,9 +5,15 @@ import TopNavigation from '../NavigationBars/TopNavigation'
 import { TextInput, Button} from 'react-native-paper'
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import axios from 'axios'
-export default function AddProduct({navigation}) {
-    const [email, setEmail] = useState(navigation.getParam('Email'))
-    const [UID, setUID] = useState(navigation.getParam('Userid'));
+import { useNavigation, useRoute } from '@react-navigation/native'
+export default function AddProduct() {
+    const navigation = useNavigation()
+    const route = useRoute()
+    const {email} = route.params
+    const {userID} = route.params
+
+    const [Email, setEmail] = useState(email)
+    const [UID, setUID] = useState(userID);
     const [productID, setProductID] = useState()
     const [pname, setPname] = useState()
     const [pstock, setPstock] = useState()
@@ -33,6 +39,7 @@ export default function AddProduct({navigation}) {
                 alert('registration failed')
             }
         })
+        navigation.navigate('Inventory', {Email})
     }
     const [scanned, setScanned] = useState(false);
     const handleBarCodeScanned = ({ type, data }) => {
@@ -46,7 +53,7 @@ export default function AddProduct({navigation}) {
       }
     return (
         <SafeAreaView style={{flex:1}}>
-            <View><TopNavigation Navigation={navigation}/></View>
+            <View><TopNavigation Email={Email}/></View>
             <View style={{flex:1}}>
                 <BarCodeScanner
                         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
@@ -54,7 +61,7 @@ export default function AddProduct({navigation}) {
             </View>
             <View>
                 <Text>user ID: {UID}</Text>
-                <TextInput label={'Product ID'} value={productID} right={<TextInput.Icon icon={'undo'} onPress={reset}/>}/>
+                <TextInput label={'Product ID'} value={productID} onChangeText={setProductID} right={<TextInput.Icon icon={'undo'} onPress={reset}/>}/>
                 <TextInput label={'Product Name'} onChangeText={setPname}/>
                 <TextInput label={'Product Stock'} onChangeText={setPstock}/>
                 <TextInput label={'Product Capital Price'} onChangeText={setPCP}/>

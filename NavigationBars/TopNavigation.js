@@ -1,16 +1,17 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { Card, Button, Avatar } from 'react-native-paper'
+import { useNavigation } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function TopNavigation({Navigation}) {
-
-    const [email, setEmail] = useState(Navigation.getParam('Email'))
+export default function TopNavigation({Email}) {
+    const navigation = useNavigation()
+    const [email, setEmail] = useState(Email)
     const Logout = () =>{
-      Navigation.navigate('Login')
+      navigation.navigate('Login')
     }
     const goToHome = () => {
-      Navigation.navigate('Dashboard')
+      navigation.navigate('Dashboard', {email})
     }
   return (
     <View style={{width:'95%', alignSelf:'center', marginTop:10}}>
