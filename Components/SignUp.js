@@ -5,7 +5,7 @@ import { Avatar, Button, Card, Portal, Text, TextInput, Modal, RadioButton} from
 import Icon from 'react-native-vector-icons/FontAwesome';
 import axios, { AxiosHeaders } from "axios";
 import { useNavigation } from "@react-navigation/native";
-
+import Link from "../Helpers/API";
 export default function SignUp() {
     const navigation = useNavigation()
     const [pVisibility, setPVisibility] = useState(true)
@@ -58,7 +58,7 @@ export default function SignUp() {
 
     const register = async () => {
         
-        const reg = await axios.post('http://192.168.1.5:8000/api/register', {
+        const reg = await axios.post(Link('/register'), {
             "Email": email,
             "Password": passwd,
             "Fname": fname,

@@ -6,6 +6,8 @@ import TopNavigation from '../NavigationBars/TopNavigation';
 import BottomNavigation from '../NavigationBars/BottomNavigation';
 import axios from 'axios';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import Link from '../Helpers/API';
+
 export default function Dashboard() {
   const navigation = useNavigation()
   const route = useRoute()
@@ -16,7 +18,7 @@ export default function Dashboard() {
 
   const getData = async () => {
     try {
-      const user = await axios.get('http://192.168.1.5:8000/api/getUdata', { params: { 'Email': userEmail } });
+      const user = await axios.get(Link('/getUdata'), { params: { 'Email': userEmail } });
       setUserData(user.data.userData[0])
     } catch (error) {
       console.error('Error fetching user data:', error);

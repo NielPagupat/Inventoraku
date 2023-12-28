@@ -4,6 +4,7 @@ import { Card, Text, TextInput, Button, Avatar, useTheme } from 'react-native-pa
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import axios from 'axios'
 import { useNavigation } from '@react-navigation/native'
+import Link from '../Helpers/API'
 
 export default function Login() {
     const navigation = useNavigation()
@@ -21,14 +22,15 @@ export default function Login() {
     }
 
     const toSignUp = () => {
-        navigation.navigate('SignUp')
+        //navigation.navigate('SignUp')
+        console.log(Link('/login'))
     }
 
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     
     const logIn = async () => {
-        const result = await axios.get('http://192.168.1.5:8000/api/login', {
+        const result = await axios.get(Link('/login'), {
             params:{
                 "Email": email,
                 "Password": password

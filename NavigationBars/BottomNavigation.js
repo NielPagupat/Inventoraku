@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faBoxesStacked, faCashRegister, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios'
 import { useNavigation } from '@react-navigation/native'
-
+import Link from '../Helpers/API';
 export default function BottomNavigation({ Email }) {
   const navigation = useNavigation()  
   const[email, setEmail] = useState(Email)
@@ -13,7 +13,7 @@ export default function BottomNavigation({ Email }) {
         navigation.navigate('POS',{email})
     }
     const goToInventory = async () => {
-        const getUserID = await axios.get('http://192.168.1.5:8000/api/getUdata', { params: { 'Email': email } })
+        const getUserID = await axios.get(Link('/getUdata'), { params: { 'Email': email } })
         const userID = getUserID.data.userData[0].id
         navigation.navigate('Inventory',{email, userID})
         

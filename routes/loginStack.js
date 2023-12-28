@@ -7,6 +7,7 @@ import Dashboard from "../Components/Dashboard";
 import POS from "../Components/POS";
 import Inventory from "../Components/Inventory";
 import AddProduct from "../Components/AddProduct";
+import ProductInfo from '../Components/ProductInfo';
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
         <Stack.Screen name="POS" component={POS} options={{ headerShown: false }}/>
         <Stack.Screen name="Inventory" component={Inventory} options={{ headerShown: false }}/>
         <Stack.Screen name="AddProduct" component={AddProduct} options={{ headerShown: false }}/>
+        <Stack.Screen name="productInfo" component={ProductInfo} />
       </Stack.Navigator>
     </NavigationContainer>
   );

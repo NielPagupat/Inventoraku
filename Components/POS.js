@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import TopNavigation from '../NavigationBars/TopNavigation'
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { useNavigation, useRoute } from '@react-navigation/native'
-
+import Link from '../Helpers/API'
 export default function POS() {
     const navigation = useNavigation()
     const route = useRoute()

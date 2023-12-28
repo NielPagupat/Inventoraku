@@ -7,6 +7,7 @@ import BottomNavigation from '../NavigationBars/BottomNavigation'
 import axios from 'axios'
 import MyDataTable from '../Helpers/MyDataTable'
 import { useNavigation, useRoute } from '@react-navigation/native'
+import Link from '../Helpers/API'
 export default function Inventory() {
 
   const navigation = useNavigation()
@@ -17,7 +18,7 @@ export default function Inventory() {
   
   useEffect(()=>{
     const get = async () =>{
-      const all = await axios.get('http://192.168.1.5:8000/api/getProduct',{params:{
+      const all = await axios.get(Link('/getProduct'),{params:{
         'userID': userID
       }})
       SetAllProducts(all.data.userData)
