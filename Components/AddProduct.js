@@ -9,8 +9,7 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 export default function AddProduct() {
     const navigation = useNavigation()
     const route = useRoute()
-    const {email} = route.params
-    const {userID} = route.params
+    const {email, userID} = route.params
 
     const [Email, setEmail] = useState(email)
     const [UID, setUID] = useState(userID);

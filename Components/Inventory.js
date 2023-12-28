@@ -12,8 +12,7 @@ export default function Inventory() {
 
   const navigation = useNavigation()
   const route = useRoute()
-  const {email} = route.params
-  const {userID} = route.params
+  const {email, userID} = route.params
   const [allProducts, SetAllProducts] = useState([])
   
   useEffect(()=>{
