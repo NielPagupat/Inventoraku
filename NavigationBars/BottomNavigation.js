@@ -9,8 +9,10 @@ import Link from '../Helpers/API';
 export default function BottomNavigation({ Email }) {
   const navigation = useNavigation()  
   const[email, setEmail] = useState(Email)
-    const goToPOS = () => {
-        navigation.navigate('POS',{email})
+    const goToPOS = async () => {
+        const getUserID = await axios.get(Link('/getUdata'), { params: { 'Email': email } })
+        const userID = getUserID.data.userData[0].id
+        navigation.navigate('POS',{email, userID})
     }
     const goToInventory = async () => {
         const getUserID = await axios.get(Link('/getUdata'), { params: { 'Email': email } })
