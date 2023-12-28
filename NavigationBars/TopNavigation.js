@@ -18,8 +18,8 @@ export default function TopNavigation({Email}) {
       <Card style={{backgroundColor:'#E5D3B3'}}>
         <Card.Content style={{flexDirection:'row', alignItems:'center'}}>
           <TouchableOpacity style={{flexDirection:'row', justifyContent:'space-between', width:75}} onPress={Logout}>
-            <Icon style={{textShadowColor:'gray', textShadowRadius: 5}} color={'#6C442D'} name='chevron-left' size={20}/>
-            <Text style={{color:'#6C442D', textShadowColor:'gray', textShadowRadius:5}}>Log-out</Text>
+            <Icon color={'#6C442D'} name='chevron-left' size={20}/>
+            <Text style={{color:'#6C442D'}}>Log-out</Text>
           </TouchableOpacity>
             <View style={{flex:1, alignItems:'center', justifyContent:'flex-end', flexDirection:'row'}}>
                 <Text style={{marginRight:50}} onPress={goToHome}>{email}</Text>

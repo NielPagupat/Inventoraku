@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, ScrollView, TouchableOpacity } from 'react-native';
-import { DataTable } from 'react-native-paper';
+import { DataTable, TextInput } from 'react-native-paper';
 
 export default function MyDataTable({ products, email }) {
     if (!Array.isArray(products)) {
@@ -32,7 +32,7 @@ return (
 
         {products.map(product => (
           <TouchableOpacity key={product.product_id} onPress={()=>{chkProductInfo(product)}}>
-            <DataTable.Row key={product.product_id} style={{}}>
+            <DataTable.Row key={product.product_id}>
               <DataTable.Cell>{product.product_id}</DataTable.Cell>
               <DataTable.Cell>{product.product_name}</DataTable.Cell>
               <DataTable.Cell>{product.retail_price}</DataTable.Cell>

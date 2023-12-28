@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Card, Button, TextInput} from 'react-native-paper'
@@ -9,7 +9,6 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import Link from '../Helpers/API'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 import { faBarcode, faRightFromBracket, faRightToBracket, faTurnUp, faX } from '@fortawesome/free-solid-svg-icons'
 export default function POS() {
     const navigation = useNavigation()
@@ -59,19 +58,19 @@ export default function POS() {
 
     
   return (
-    <SafeAreaView style={{flex:1}}>
+    <SafeAreaView style={{flex:1, backgroundColor:'#FFFBF3'}}>
         <View><TopNavigation Email={email}/></View>
-        <View style={{flex:2, justifyContent:'center', alignItems:'center'}}>
+        <View style={{flex:2, justifyContent:'center', alignItems:'center', marginVertical:10}}>
             <BarCodeScanner
                     onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
                     style={StyleSheet.absoluteFillObject}/>
                      
         </View>
         <View style={{backgroundColor:'#E5D3B3', alignItems:'center'}}>
-          <TextInput theme={{colors: {text: '#39FF14'}}} style={{textAlign:"right", width:'97%', marginVertical:5, backgroundColor:'#212427'}} value={total} readOnly/>
+          <TextInput style={{textAlign:"right", width:'97%', marginVertical:5, backgroundColor:'#F5F5F5'}} underlineColor='transparent' value={total} editable={false}/>
         </View>
-        <View style={{backgroundColor:'red', flex:1}}>
-            <Card style={{flex:1, backgroundColor:'grey'}}>
+        <View style={{flex:1}}>
+            <Card style={{flex:1}}>
                 <Card.Content style={{flexDirection:'row', backgroundColor:'#FFFBF3', height:'100%'}}>
                     <View style={{flexDirection:'row', flex:1, justifyContent:'center'}}>
                         <View style={{flex:2.20, justifyContent:'center'}}>

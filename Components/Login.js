@@ -22,8 +22,7 @@ export default function Login() {
     }
 
     const toSignUp = () => {
-        //navigation.navigate('SignUp')
-        console.log(Link('/login'))
+        navigation.navigate('SignUp')
     }
 
     const [email, setEmail] = useState()
