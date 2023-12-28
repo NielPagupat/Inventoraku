@@ -3,7 +3,7 @@ import React from 'react';
 import { View, ScrollView, TouchableOpacity } from 'react-native';
 import { DataTable } from 'react-native-paper';
 
-export default function MyDataTable({ products }) {
+export default function MyDataTable({ products, email }) {
     if (!Array.isArray(products)) {
         return null; // or return an empty view or loading indicator
       }
@@ -16,7 +16,7 @@ export default function MyDataTable({ products }) {
       const navigation = useNavigation()
     
       const chkProductInfo = (product) => {
-          navigation.navigate('productInfo', {product})
+          navigation.navigate('productInfo', {product, email})
       }
 
 

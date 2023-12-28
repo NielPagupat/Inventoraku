@@ -6,6 +6,7 @@ import { TextInput, Button} from 'react-native-paper'
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import axios from 'axios'
 import { useNavigation, useRoute } from '@react-navigation/native'
+import Link from '../Helpers/API'
 export default function AddProduct() {
     const navigation = useNavigation()
     const route = useRoute()
@@ -23,7 +24,7 @@ export default function AddProduct() {
 
 
     const addProduct = async () =>{
-        const result = await axios.post('http://192.168.1.5:8000/api/addProduct', {
+        const result = await axios.post(Link('/addProduct'), {
             'UID': UID,
             'PID': productID,
             'Pname': pname,
