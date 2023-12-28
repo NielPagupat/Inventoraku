@@ -17,6 +17,7 @@ export default function Inventory() {
   const [allProducts, SetAllProducts] = useState([])
   
   useEffect(()=>{
+    
     const get = async () =>{
       const all = await axios.get(Link('/getProduct'),{params:{
         'userID': userID
@@ -24,9 +25,17 @@ export default function Inventory() {
       SetAllProducts(all.data.userData)
       console.log(all.data)
     }
+    
+    const refreshTimer = setInterval(() => {
+      get()
+    }, 10000);
+    
     get()
-    console.log(allProducts)
-  },[navigation])
+
+    return () => {
+      clearInterval(refreshTimer);
+    }
+  },[])
 
   const showUID = () => {
     console.log(email)
@@ -38,7 +47,7 @@ export default function Inventory() {
     <SafeAreaView style={{flex:1}}>
       <View><TopNavigation Email={email}/></View>
       <View style={{flex:1, width:'100%'}}>
-        <MyDataTable products={ allProducts } />
+        <MyDataTable products={ allProducts } email = {email}/>
       </View>
       <View style={{flexDirection:'row', width:'100%', justifyContent:'space-around'}}>
         <Button onPress={goToAdd}>Add Product</Button>
