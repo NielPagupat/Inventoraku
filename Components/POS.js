@@ -68,7 +68,7 @@ export default function POS() {
                      
         </View>
         <View style={{backgroundColor:'#E5D3B3', alignItems:'center'}}>
-          <TextInput style={{textAlign:"right", width:'97%', marginVertical:5, backgroundColor:'#212427', color:"#39FF14"}} value={total} readOnly/>
+          <TextInput theme={{colors: {text: '#39FF14'}}} style={{textAlign:"right", width:'97%', marginVertical:5, backgroundColor:'#212427'}} value={total} readOnly/>
         </View>
         <View style={{backgroundColor:'red', flex:1}}>
             <Card style={{flex:1, backgroundColor:'grey'}}>
