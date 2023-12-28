@@ -59,17 +59,18 @@ const MyForm = () => {
 
   const navigation = useNavigation();
   const saveChanges = async () => {
+    console.log()
     const result = await axios.post(Link('/save'), {
-      "UID": PID,
-      "PID": product.user_id,
+      "UID": product.user_id,
+      "PID": PID,
       "Pname": pname,
-      "CP": CP,
-      "RP": RP,
+      "CP": parseFloat(CP),
+      "RP": parseFloat(RP),
       "Desc": desc
     }, {headers:{'Content-Type': 'application/json'}}).then(function (response){
       if (response.status == 200) {
           alert('Save Succesful')
-          navigation.navigate('Inventory', {email, userID})
+          // navigation.navigate('Inventory', {email, userID})
       } else {
           alert('SaveFailed')
       }

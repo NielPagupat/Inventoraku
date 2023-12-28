@@ -20,10 +20,13 @@ export default function POS() {
     const [bcNum, setBcNum] = useState('');
     
     const [code, setCode] = useState('')
-    const [multiplier, setMultiplier] = useState('')
-
+    const [multiplier, setMultiplier] = useState('1')
     const [isActiveBarcodeSearch, setBarcodeSearch] = useState(false)
     const [isActiveMultiplier, setActiveMultiplier] = useState(false)
+    const [clicked, setClick] = useState('#987554')
+    const [mclicked, setMclicked] = useState('#987554')
+    
+    const [productSold, setProductSold] = useState([])
 
     const [barcodeVisible, SetBarcodeVisible] = useState(false);
     const [multiplyVisible, SetMultiplyVisible] = useState(false);
@@ -48,24 +51,26 @@ export default function POS() {
       }, []); 
 
       const handleBarCodeScanned = async ({ type, data }) => {
+        setCode(data)
         const result = await axios.get(Link('/getPrice'), {params:{
           'PID': data,
           'UID': userID
         }})
+        // Add product to sold list 
+        const arr = productSold
+        const value =  parseInt(total) + parseInt(result.data.price[0].retail_price)
+        setTotal(value.toString())
+        setScanned(true)
 
-        // setTotal(result.data.price[0].retail_price)
-        // setTotal((parseInt(total) + parseInt(result.data.price[0].retail_price)).toString)
-        if (isActiveMultiplier == true) {
-          const product = parseInt(result.data.price[0].retail_price)*parseInt(multiplier)
-          const value = parseInt(total) + parseInt(product)
-          setTotal(value.toString())
-          setScanned(true)
-          setActiveMultiplier(false)
-        } else {
-          const value =  parseInt(total) + parseInt(result.data.price[0].retail_price)
-          setTotal(value.toString())
-          setScanned(true)
-        }
+        arr.push({
+          "PID": code,
+          "UID": userID,
+          "Price": result.data.price[0].retail_price,
+          "Quantity": multiplier,
+        })
+
+        setProductSold(arr)
+      
       };
 
       const reset = async() =>{
@@ -110,6 +115,26 @@ export default function POS() {
         setMultiplier('')
       }
 
+      
+      const getBarcode = () =>{
+        if (isActiveBarcodeSearch == false) {
+          setClick('#9c8c7c')
+          setBarcodeSearch(true)
+        } else {
+          setClick('#987554')
+          setBarcodeSearch(false)
+        }
+      }
+
+      const multiplierStatus = () => {
+        if (isActiveMultiplier == false) {
+          setMclicked('#9c8c7c')
+          setActiveMultiplier(true)
+        } else {
+          setMclicked('#987554')
+          setActiveMultiplier(false)
+        }
+      }
       const numpadInput = (value) => {
         if (isActiveBarcodeSearch == true) {
           setCode(code+value)
