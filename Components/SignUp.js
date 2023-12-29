@@ -79,21 +79,6 @@ export default function SignUp() {
         })
     }
 
-    const submitData = () => {
-        console.log({
-            "email": email,
-            "password": passwd,
-            "fname": fname,
-            "lname": lname,
-            "mi": mi,
-            "addr": address,
-            "bname": bname,
-            "baddress": baddress,
-            "PayOpt": payOpt,
-            "ownType": ownType,
-            "bpermit": bpermit
-        })
-    }
 
     return (
         <SafeAreaView style={styles.Content}>

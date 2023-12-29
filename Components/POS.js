@@ -23,8 +23,6 @@ export default function POS() {
     const [multiplier, setMultiplier] = useState('1')
     const [isActiveBarcodeSearch, setBarcodeSearch] = useState(false)
     const [isActiveMultiplier, setActiveMultiplier] = useState(false)
-    const [clicked, setClick] = useState('#987554')
-    const [mclicked, setMclicked] = useState('#987554')
     
     const [productSold, setProductSold] = useState([])
 
@@ -115,26 +113,6 @@ export default function POS() {
         setMultiplier('')
       }
 
-      
-      const getBarcode = () =>{
-        if (isActiveBarcodeSearch == false) {
-          setClick('#9c8c7c')
-          setBarcodeSearch(true)
-        } else {
-          setClick('#987554')
-          setBarcodeSearch(false)
-        }
-      }
-
-      const multiplierStatus = () => {
-        if (isActiveMultiplier == false) {
-          setMclicked('#9c8c7c')
-          setActiveMultiplier(true)
-        } else {
-          setMclicked('#987554')
-          setActiveMultiplier(false)
-        }
-      }
       const numpadInput = (value) => {
         if (isActiveBarcodeSearch == true) {
           setCode(code+value)
