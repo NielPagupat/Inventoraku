@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, Keyboard } from 'react-native'
+import React, { useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import TopNavigation from '../NavigationBars/TopNavigation'
 import { TextInput, Button} from 'react-native-paper'
@@ -7,6 +7,8 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import axios from 'axios'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import Link from '../Helpers/API'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 export default function AddProduct() {
     const navigation = useNavigation()
     const route = useRoute()
@@ -20,7 +22,28 @@ export default function AddProduct() {
     const [PCP, setPCP] = useState()
     const [PRP, setPRP] = useState()
     const [desc, setDesc] = useState()
+    const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
+    useEffect(() => {
+        const keyboardDidShow = Keyboard.addListener(
+        'keyboardDidShow',
+        () => {
+          setKeyboardVisible(true);
+        }
+        );
+      
+        const keyboardDidHide = Keyboard.addListener(
+        'keyboardDidHide',
+        () => {
+          setKeyboardVisible(false);
+        }
+        );
+      
+        return () => {
+        keyboardDidShow.remove();
+        keyboardDidHide.remove();
+        };
+    }, []);
 
 
     const addProduct = async () =>{
@@ -51,23 +74,42 @@ export default function AddProduct() {
         setScanned(false)
         setProductID('')
       }
+
+    const backToInventory = () => {
+        navigation.navigate('Inventory', {Email})
+    }
+
+    
+    
+      
+    
+
     return (
-        <SafeAreaView style={{flex:1}}>
-            <View><TopNavigation Email={Email}/></View>
-            <View style={{flex:1}}>
+        <SafeAreaView style={{flex:1, backgroundColor:'#FFFBF3'}}>
+            <View><TopNavigation val="Inventory" Email={Email} onPress={backToInventory}/></View>
+            {!isKeyboardVisible && (
+                <View style={{flex:1, marginTop:10}}>  
                 <BarCodeScanner
                         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-                        style={StyleSheet.absoluteFillObject}/>
-            </View>
-            <View>
+                        style={StyleSheet.absoluteFillObject}/> 
+                </View>
+            )}
+
+            <View style={{margin:10}}>
                 <Text>user ID: {UID}</Text>
-                <TextInput label={'Product ID'} value={productID} onChangeText={setProductID} right={<TextInput.Icon icon={'undo'} onPress={reset}/>}/>
-                <TextInput label={'Product Name'} onChangeText={setPname}/>
-                <TextInput label={'Product Stock'} onChangeText={setPstock}/>
-                <TextInput label={'Product Capital Price'} onChangeText={setPCP}/>
-                <TextInput label={'Product Retail Price'} onChangeText={setPRP}/>
-                <TextInput label={'Description'} onChangeText={setDesc}/>
-                <Button onPress={addProduct}>Submit</Button>
+                <TextInput underlineColor='transparent' activeUnderlineColor='#987554' style={{marginHorizontal: 5, marginVertical:5, backgroundColor:'#D9D9D9', borderRadius: 5}} label={'Product ID'} value={productID} onChangeText={setProductID} right={<TextInput.Icon icon={'delete'} onPress={reset}/>}/>
+                <View style={{flexDirection:'row', marginVertical:5}}>
+                    <TextInput underlineColor='transparent' activeUnderlineColor='#987554' style={{flex:3, marginHorizontal:5, backgroundColor:'#D9D9D9', borderRadius: 5}} label={'Product Name'} onChangeText={setPname}/>
+                    <TextInput underlineColor='transparent' activeUnderlineColor='#987554' style={{flex:1, marginHorizontal:5, backgroundColor:'#D9D9D9', borderRadius: 5}} label={'Stock'} onChangeText={setPstock}/>
+                </View>
+                <TextInput underlineColor='transparent' activeUnderlineColor='#987554' style={{marginHorizontal:5, marginVertical:5, backgroundColor:'#D9D9D9', borderRadius: 5}} label={'Description'} onChangeText={setDesc}/>
+                <View style={{flexDirection:'row'}}>
+                    <TextInput underlineColor='transparent' activeUnderlineColor='#987554' style={{flex:1, marginVertical:5, marginHorizontal:5, backgroundColor:'#D9D9D9', borderRadius: 5}} label={'Capital Price'} onChangeText={setPCP}/>
+                    <TextInput underlineColor='transparent' activeUnderlineColor='#987554' style={{flex:1, marginVertical:5, marginHorizontal:5, backgroundColor:'#D9D9D9', borderRadius: 5}} label={'Retail Price'} onChangeText={setPRP}/>
+                </View>
+                <TouchableOpacity style={{backgroundColor:'#987554', marginHorizontal:5, marginVertical:15, justifyContent:'center', alignItems:'center', alignSelf:'center', height:40, width:'50%', borderRadius:10}} onPress={addProduct}>
+                    <Text style={{color:'#F5F5F5'}}>Add Product</Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
   )

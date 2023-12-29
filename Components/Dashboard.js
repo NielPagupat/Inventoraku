@@ -28,9 +28,13 @@ export default function Dashboard() {
   useEffect(() => {
     getData();
   }, []);
+
+  const toLogOut = () => {
+    navigation.navigate('Login');
+  }
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{width:'100%'}}><TopNavigation Email = {email}/></View>
+      <View style={{width:'100%'}}><TopNavigation val="Log-out" onPress={toLogOut} Email = {email}/></View>
       <View style={styles.content}><Text>{userData.id}</Text></View>
       <View></View>
       <View style={{width:'100%'}}><BottomNavigation Email = {email} /></View>

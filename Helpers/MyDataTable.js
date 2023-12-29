@@ -16,7 +16,7 @@ export default function MyDataTable({ products, email }) {
       const navigation = useNavigation()
     
       const chkProductInfo = (product) => {
-          navigation.navigate('productInfo', {product, email})
+          navigation.navigate('ProductInfo', {product, email})
       }
 
 
