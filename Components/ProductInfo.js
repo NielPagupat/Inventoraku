@@ -52,6 +52,30 @@ const MyForm = () => {
   const [desc, setDesc] = useState(product.description);
   const [visible, SetVisible] = useState(false);
 
+  const [qty, setQTY] = useState()
+  const [suppName, setSuppName] = useState()
+  const [suppEmail, setSuppEmail] = useState()
+  const [delvAddress, setDelvAddress] = useState()
+  const [exDeliveryDate, setExDeliveryDate] = useState()
+
+
+  const handleResupply = async () => {
+    const res = await axios.post(Link('/subRdetails'), {
+      'Pname': pname,
+      'PID': PID,
+      'qty': qty,
+      'suppName': suppName,
+      'suppEmail': suppEmail,
+      'delvAddr': delvAddress,
+      'exDelvDate': exDeliveryDate
+    },{headers:{'Content-Type': 'application/json'}}).then((response)=>{
+      if (response.status == 200) {
+        alert('Succes')
+      } else {
+        alert('fail')
+      }
+    })
+  }
   const handleToggleEditability = (input) => {
     setIsEditable((prevState) => ({
       ...prevState,
