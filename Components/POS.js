@@ -229,18 +229,30 @@ export default function POS() {
                     <View style={{flex:1, justifyContent:'center'}}>
                         <View style={{flex:3, flexDirection:'row', justifyContent:'center'}}>
                             <View style={{flex:3, marginBottom:5, borderRadius:5, backgroundColor:'#D9D9D9'}}>
-                                <View style={{flexDirection:'row', justifyContent:'space-around', marginTop:5}}> 
-                                    <Text>Name</Text>
-                                    <Text>Price</Text>
-                                    <Text>Quantity</Text>
+                                <View style={{flexDirection:'row', justifyContent:'space-around', marginTop:5,}}>
+                                  <View style={{flex:1, alignItems:'flex-start', marginLeft: 10}}>
+                                    <Text style={{fontWeight:'bold'}}>Name</Text>
+                                  </View>
+                                  <View style={{flex:1, alignItems:'flex-start', marginLeft: 10}}>
+                                    <Text style={{fontWeight:'bold'}}>Price</Text>
+                                  </View>
+                                  <View style={{flex:1, alignItems:'flex-start', marginLeft: 10}}>
+                                    <Text style={{fontWeight:'bold'}}>Quantity</Text>
+                                  </View>
                                 </View>
                               <ScrollView>
                                   {
                                     productSold.map((obj, i)=>
                                     <View key={i}style={{flexDirection:'row', justifyContent:'space-around'}}>
-                                      <Text>{obj.name}</Text>
-                                      <Text>{obj.Price}</Text>
-                                      <Text>{obj.Quantity}</Text>
+                                      <View style={{flex:1, alignItems:'flex-start', marginLeft: 10}}>
+                                        <Text>{obj.name}</Text>
+                                      </View>
+                                      <View style={{flex:1, alignItems:'flex-start', marginLeft: 10}}>
+                                        <Text>{obj.Price}</Text>
+                                      </View>
+                                      <View style={{flex:1, alignItems:'flex-start', marginLeft: 10}}>
+                                        <Text>{obj.Quantity}</Text>
+                                      </View>
                                     </View>)
                                   }
                               </ScrollView>
