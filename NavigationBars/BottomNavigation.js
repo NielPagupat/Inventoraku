@@ -20,12 +20,11 @@ export default function BottomNavigation({ Email }) {
         navigation.navigate('Inventory',{email, userID})
         
     }
-    const goToProfits = () => {
-
-    }
-
-    const goToProfit = () =>{
-      console.log(email)
+   
+    const goToProfit = async () =>{
+      const getUserID = await axios.get(Link('/getUdata'), { params: { 'Email': email } })
+      const userID = getUserID.data.userData[0].id
+      navigation.navigate('Profit',{email, userID})
     }
   return (
     <View style={{width:'100%'}}>
@@ -38,7 +37,7 @@ export default function BottomNavigation({ Email }) {
                                       marginHorizontal:3, 
                                       height:70,
                                       borderTopLeftRadius:10,
-                                      borderTopRightRadius:10,}}>
+                                      borderTopRightRadius:10,}} onPress={goToProfit}>
               <FontAwesomeIcon icon={faDollarSign} size={35} color="#FFFFFF"/>
             </TouchableOpacity>
             <TouchableOpacity style={{flex:1, 

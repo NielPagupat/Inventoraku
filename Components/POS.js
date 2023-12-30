@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import Link from '../Helpers/API'
 import { faBarcode, faDeleteLeft, faRightFromBracket, faRightToBracket, faTurnUp, faX } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
+
 export default function POS() {
     const navigation = useNavigation()
     const route = useRoute()
@@ -18,13 +19,11 @@ export default function POS() {
     const {userID} = route.params
     const [total, setTotal] = useState('0');
     const [ctotal, setCtotal] = useState('0');
-    
+    const [TID, setTID] = useState('')
     const [code, setCode] = useState('')
     const [multiplier, setMultiplier] = useState('1')
     const [isActiveBarcodeSearch, setBarcodeSearch] = useState(false)
-    const [isActiveMultiplier, setActiveMultiplier] = useState(false)
-    const [clicked, setClick] = useState('#987554')
-    const [mclicked, setMclicked] = useState('#987554')
+    
     
     const [productSold, setProductSold] = useState([])
 
@@ -52,6 +51,7 @@ export default function POS() {
 
       const handleBarCodeScanned = async ({ type, data }) => {
         setCode(data)
+        setScanned(true)
         const result = await axios.get(Link('/getPrice'), {params:{
           'PID': data,
           'UID': userID
@@ -61,14 +61,16 @@ export default function POS() {
         const value =  parseInt(total) + parseInt(product)
         const cValue = parseInt(ctotal) + parseInt(capital)
         setTotal(value.toString())
-        setScanned(true)
+        setCtotal(cValue.toString())
+        
 
         // Add product to sold list 
         const arr = productSold
         arr.push({
-          "PID": code,
+          "PID": data,
           "UID": userID,
           "name": result.data.price[0].product_name,
+          "capital": result.data.price[0].capital_price,
           "Price": result.data.price[0].retail_price,
           "Quantity": multiplier,
         })
@@ -106,6 +108,7 @@ export default function POS() {
           "Price": result.data.price[0].retail_price,
           "Quantity": multiplier,
         })
+          
 
           setProductSold(arr)
 
@@ -119,7 +122,9 @@ export default function POS() {
       }
 
       const submitTransaction = async() => {
+          
         const result = await axios.post(Link('/totalSold'), {
+          'TID': TID,
           "UID": userID,
           "capital": ctotal,
           "retail": total,
@@ -138,6 +143,7 @@ export default function POS() {
       const submitItem = async() => {
         for (let i = 0; i < productSold.length; i++) {
           const result = await axios.post(Link('/itemSold'), {
+            'TID': TID,
             'PID': productSold[i].PID,
             'UID': productSold[i].UID,
             'Name': productSold[i].name,
@@ -154,14 +160,17 @@ export default function POS() {
       }
 
       const clear = () => {
+        setTID(Math.floor(Math.random() * 1000000000).toString())
         setTotal('0')
         setCode('')
         setMultiplier('1')
         setProductSold([])
         setCtotal('0')
         submitTransaction()
-        console.log(productSold)
         submitItem()
+        console.log(productSold)
+        
+        
       }
 
       
@@ -187,12 +196,12 @@ export default function POS() {
 
     const showMultiplyModal = () => {
       SetMultiplyVisible(true);
-      setMultiplier('')
-      setActiveMultiplier(true);
+      setMultiplier('1')
+      
     }
     const hideMultiplyModal = () => {
       SetMultiplyVisible(false);
-      setActiveMultiplier(false);
+      
     }
     const multiplyContainerStyle = {backgroundColor: '#987554', height: 370, margin: 40, borderRadius: 10, padding:10};
 
