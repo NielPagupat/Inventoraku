@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import Link from '../Helpers/API'
 import { faBarcode, faRightFromBracket, faRightToBracket, faTurnUp, faX } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
+import SubmitTransaction from '../Helpers/SubmitTransaction'
 export default function POS() {
     const navigation = useNavigation()
     const route = useRoute()
@@ -128,12 +129,13 @@ export default function POS() {
       }
 
       const clear = () => {
-        setTotal('0')
-        setCode('')
-        setMultiplier('1')
-        setProductSold([])
-        setCtotal('0')
-        console.log(productSold, ctotal)
+        // setTotal('0')
+        // setCode('')
+        // setMultiplier('1')
+        // setProductSold([])
+        // setCtotal('0')
+        console.log(submit(ctotal, total))
+        console.log(productSold, ctotal, total)
       }
 
       const numpadInput = (value) => {
