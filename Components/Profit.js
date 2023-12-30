@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
-import { View, Button, Text } from 'react-native';
+import { View, Button, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import TopNavigation from '../NavigationBars/TopNavigation';
 import BottomNavigation from '../NavigationBars/BottomNavigation';
+import DatePicker from 'react-native-modern-datepicker';
+import {getFormatedDate} from 'react-native-modern-datepicker';
+import { Modal, Portal } from 'react-native-paper';
 
 export default function Profit() {
   const navigation = useNavigation();
   const route = useRoute();
   const { email } = route.params;
-  const [date, setDate] = useState(new Date())
   const [selectedInterval, setSelectedInterval] = useState('Daily');
+  const [showDatePicker, setShowDatePicker] = useState(false);
+
+  const [open, setOpen] = useState(false);
+  const [date, setDate] = useState();
+
 
   const [content, setContent] = useState('daily')
   const handleIntervalChange = (interval) => {
@@ -41,6 +48,27 @@ export default function Profit() {
         break;
     }}
 
+    const onChange = (event, selectedDate) => {
+      const currentDate = selectedDate || date;
+      setShowDatePicker(Platform.OS === 'ios'); // For iOS, keep showing until 'Done' is pressed
+      setDate(currentDate);
+    };
+
+    const showPicker = () => {
+      setShowDatePicker(true);
+    };
+
+
+
+    const openDatePicker = () => {
+      setOpen(!open);
+    }
+    const handleChange = (propDate) => {
+      setDate(propDate);
+      
+      console.log(propDate.getYear);
+    }
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View>
@@ -57,7 +85,7 @@ export default function Profit() {
           {/* Render content based on the selected interval */}
           {selectedInterval === 'Daily' && 
             <View>
-              <Text>{date.getMonth().toString()}</Text>
+              {/* <Text>{date.getMonth().toString()}</Text> */}
             </View>
             }
           {selectedInterval === 'Weekly' && 
@@ -70,6 +98,22 @@ export default function Profit() {
             <Text>{content}</Text>
             }
         </View>
+      </View>
+      <View style={{flex:3, alignItems:'center'}}>
+        <TouchableOpacity onPress={openDatePicker}>
+          <Text>OPEN THIS BOYE</Text>
+        </TouchableOpacity>
+
+      <Portal>
+        <Modal style={{backgroundColor:'#987554'}} visible={open} transparent={true}>
+          <View style={{alignItems:'center'}}>
+            <TouchableOpacity onPress={openDatePicker}>
+              <Text>CLOSE</Text>
+            </TouchableOpacity>
+          </View>
+          <DatePicker mode='calendar' selected={date} onDateChange={handleChange}/>
+        </Modal>
+      </Portal>
       </View>
       <View>
         <BottomNavigation Email={email} />

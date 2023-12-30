@@ -53,7 +53,7 @@ export default function ProductInfo() {
       [input]: !prevState[input],
     }));
   };
-  const inputRef = useRef(null);
+  
   const [PIDModal, setPIDModal] = useState(false);
   const [pNameModal, setPNameModal] = useState(false);
   const [CPModal, setCPModal] = useState(false);
@@ -63,8 +63,6 @@ export default function ProductInfo() {
 
   const [resState, setResState] = useState(false)
   const autoResState = () => setResState(!resState)
-
-  
     
   const navigation = useNavigation();
   const saveChanges = async () => {
