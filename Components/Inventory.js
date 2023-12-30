@@ -44,9 +44,12 @@ export default function Inventory() {
   const goToAdd = () =>{
     navigation.navigate('AddProduct',{email, userID})
   }
+  const goToDashBoard = () => {
+    navigation.navigate('Dashboard', {email})
+  }
   return (
     <SafeAreaView style={{flex:1, backgroundColor:'#FFFBF3'}}>
-      <View style={{backgroundColor:'#F5F5F5'}}><TopNavigation Email={email}/></View>
+      <View style={{backgroundColor:'#F5F5F5'}}><TopNavigation val="Dashboard" Email={email} onPress={goToDashBoard}/></View>
       <View style={{flex:1, width:'100%'}}>
         <View style={{flexDirection:'row', marginTop:15, alignItems:'center', marginLeft:15}}>
           <TextInput placeholder='Search Inventory...' activeUnderlineColor='transparent' underlineColor='transparent' style={{width:'50%', height:35, marginRight:15, borderRadius:10, borderTopLeftRadius:10, borderTopRightRadius:10, backgroundColor:'#D9D9D9'}}/>

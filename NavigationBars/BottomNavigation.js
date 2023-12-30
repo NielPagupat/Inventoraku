@@ -20,6 +20,9 @@ export default function BottomNavigation({ Email }) {
         navigation.navigate('Inventory',{email, userID})
         
     }
+    const goToProfits = () => {
+
+    }
 
     const goToProfit = () =>{
       console.log(email)
