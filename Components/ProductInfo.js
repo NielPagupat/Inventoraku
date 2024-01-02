@@ -47,12 +47,6 @@ export default function ProductInfo() {
       }
     })
   }
-  const handleToggleEditability = (input) => {
-    setIsEditable((prevState) => ({
-      ...prevState,
-      [input]: !prevState[input],
-    }));
-  };
   
   const [PIDModal, setPIDModal] = useState(false);
   const [pNameModal, setPNameModal] = useState(false);
@@ -61,8 +55,9 @@ export default function ProductInfo() {
   const [stockModal, setStockModal] = useState(false);
   const [descModal, setDescModal] = useState(false);
 
-  const [resState, setResState] = useState(false)
-  const autoResState = () => setResState(!resState)
+  const [resState, setResState] = useState(product.autoResStatus)
+  const [ResInfo, setResInfo] = useState()
+  
     
   const navigation = useNavigation();
   const saveChanges = async () => {
@@ -77,18 +72,67 @@ export default function ProductInfo() {
     }, {headers:{'Content-Type': 'application/json'}}).then(function (response){
       if (response.status == 200) {
           alert('Save Succesful')
-          // navigation.navigate('Inventory', {email, userID})
       } else {
           alert('SaveFailed')
       }
   })
+  }
+  const getResupplyInfo = async() => {
+    const res = await axios.get(Link('/getResDet'), {params:{
+      'UID':product.user_id,
+      'PID': PID
+    }})
+
+    setResInfo(res.data.info[0])
+    if (ResInfo == null) {
+      SetVisible(true);
+    } else {
+      setSuppName(ResInfo.suppliername)
+      setSuppEmail(ResInfo.Supplier_email)
+      setQTY(ResInfo.qty)
+      setDelvAddress(ResInfo.delivery_address)
+      setExDeliveryDate(ResInfo.expected_delivery)
+      SetVisible(true);
+      
+    }
+    
+  }
+
+  const setResupplyInfo = async () =>{
+      const res = await axios.post(Link('/setResInfo'),{
+        'UID': product.user_id,
+        'PID': PID,
+        'Pname': pname,
+        'QTY': qty,
+        'SuppName': suppName,
+        'SuppEmail': suppEmail,
+        'DelvAddress': delvAddress,
+        'ExDelvDate': exDeliveryDate
+      },{headers:{'Content-Type': 'application/json'}}).then(function (response){
+        if (response.status == 200) {
+            alert('Save Succesful')
+            SetVisible(false);
+        } else {
+            alert('Save Failed')
+      }})
+  }
+
+
+
+  const setAutoResStatus = async (newValue) => {
+    setResState(newValue)
+    const res = await axios.post(Link('/setAutoRes'),{
+      'UID':product.user_id,
+      'PID':PID,
+      'Status': newValue
+    }, {headers:{'Content-Type': 'application/json'}})
   }
 
   const backToInventory = () => {
     navigation.navigate('Inventory', {email})
   }
 
-  const showModal = () => SetVisible(true);
+  
   const hideModal = () => SetVisible(false);
   const containerStyle = {backgroundColor: '#FFFBF3', height: 500, margin: 40, borderRadius: 5};
 
@@ -112,8 +156,8 @@ export default function ProductInfo() {
       <View><TopNavigation val="Inventory" onPress={backToInventory} Email={email}/></View>
       <View style={{flexDirection:'row', alignItems:'center', justifyContent:'flex-end', marginTop:10}}>
         <Text style={{color:'#212427'}}>Auto-Resupply?</Text>
-        <Switch value={resState} onValueChange={autoResState} />
-        <TouchableOpacity style={{marginRight:20}} onPress={showModal}>
+        <Switch value={resState} onValueChange={(newValue)=>setAutoResStatus(newValue)} />
+        <TouchableOpacity style={{marginRight:20}} onPress={getResupplyInfo}>
           <Text style={{color:'#987554'}}>Edit Resupply Details</Text>
         </TouchableOpacity>
       </View>
@@ -153,18 +197,18 @@ export default function ProductInfo() {
           <View style={{alignItems:'center'}}>
             <Text style={{fontSize:20, marginBottom:30}}>Resupplying Details</Text>
             <View style={{flexDirection:'row', width:'85%'}}>
-              <TextInput underlineColor="transparent" label="Product Name" style={{flex:3, marginHorizontal:2, marginBottom:5, borderRadius:5, backgroundColor:'#D9D9D9'}}/>
-              <TextInput underlineColor="transparent" label="Qty." style={{flex:1, marginHorizontal:2, marginBottom:5, borderRadius:5, backgroundColor:'#D9D9D9'}}/>
+              <TextInput underlineColor="transparent" value={pname} readOnly label="Product Name" style={{flex:3, marginHorizontal:2, marginBottom:5, borderRadius:5, backgroundColor:'#D9D9D9'}}/>
+              <TextInput underlineColor="transparent" onChangeText={setQTY} value={qty} label="Qty." style={{flex:1, marginHorizontal:2, marginBottom:5, borderRadius:5, backgroundColor:'#D9D9D9'}}/>
             </View>
             <View style={{ width:'85%'}}>
-              <TextInput underlineColor="transparent" label="Supplier Name" style={{marginHorizontal:2, marginBottom:5, borderRadius:5, backgroundColor:'#D9D9D9'}}/>
-              <TextInput underlineColor="transparent" label="Supplier Contact #" style={{marginHorizontal:2, marginBottom:5, borderRadius:5, backgroundColor:'#D9D9D9'}}/>
+              <TextInput underlineColor="transparent" onChangeText={setSuppName} value={suppName} label="Supplier Name" style={{marginHorizontal:2, marginBottom:5, borderRadius:5, backgroundColor:'#D9D9D9'}}/>
+              <TextInput underlineColor="transparent" onChangeText={setSuppEmail} value={suppEmail} label="Supplier Contact #" style={{marginHorizontal:2, marginBottom:5, borderRadius:5, backgroundColor:'#D9D9D9'}}/>
             </View>
             <View style={{ width:'85%'}}>
-              <TextInput underlineColor="transparent" label="Delivery Address" style={{marginHorizontal:2, marginBottom:5, borderRadius:5, backgroundColor:'#D9D9D9'}}/>
-              <TextInput underlineColor="transparent" label="Expected Delivery Date" style={{marginHorizontal:2, marginBottom:5, borderRadius:5, backgroundColor:'#D9D9D9'}}/>
+              <TextInput underlineColor="transparent" onChangeText={setDelvAddress} value={delvAddress} label="Delivery Address" style={{marginHorizontal:2, marginBottom:5, borderRadius:5, backgroundColor:'#D9D9D9'}}/>
+              <TextInput underlineColor="transparent" onChangeText={setExDeliveryDate} value={exDeliveryDate} label="Expected arrival in days" style={{marginHorizontal:2, marginBottom:5, borderRadius:5, backgroundColor:'#D9D9D9'}}/>
             </View>
-            <TouchableOpacity style={{marginVertical:10}}>
+            <TouchableOpacity style={{marginVertical:10}} onPress={setResupplyInfo}>
               <FontAwesomeIcon icon={faCircleCheck} size={50} style={{color:'#987554'}}/>
             </TouchableOpacity>
           </View>
