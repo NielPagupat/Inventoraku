@@ -156,6 +156,10 @@ export default function Profit() {
           break;
       }
     }
+
+    const goToDashBoard = () => {
+      navigation.navigate('Dashboard', {email})
+    }
       
 
     // useEffect(()=>{
@@ -191,7 +195,7 @@ export default function Profit() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor:'#FFFBF3' }}>
       <View>
-        <TopNavigation Email={email} />
+        <TopNavigation val="Dashboard" onPress={goToDashBoard} Email={email} />
       </View>
       <View style={{ flex: 1 }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around', margin:10 }}>
@@ -212,7 +216,7 @@ export default function Profit() {
           </View>
           {selectedInterval === 'Daily' && 
             <View style={{flex:1}}>
-                <View style={{flex:1, backgroundColor:'#DEDEDE', borderRadius:20, marginVertical:10}}>
+                <View style={{flex:1, backgroundColor:'#D9D9D9', borderRadius:20, marginVertical:10}}>
                   <ScrollView style={{margin:20}}>
                     <Text style={{fontWeight:'bold', fontSize:20}}>All Profit</Text>
                     {profitInfo && profitInfo.length > 0 ? (
@@ -245,7 +249,7 @@ export default function Profit() {
                     )}
                   </ScrollView>
                 </View>
-                <View style={{flex:1.8, backgroundColor:'#DEDEDE', borderRadius:20, marginBottom:10}}>
+                <View style={{flex:1.8, backgroundColor:'#D9D9D9', borderRadius:20, marginBottom:10}}>
                   <ScrollView style={{margin:20}}>
                     <Text style={{fontWeight:'bold', fontSize:20}}>Individual items Sold</Text>
                     {singleItem && singleItem.length > 0 ? (
@@ -286,7 +290,7 @@ export default function Profit() {
             }
           {selectedInterval === 'Weekly' && 
             <View style={{flex:1}}>
-            <View style={{flex:1, backgroundColor:'#DEDEDE', borderRadius:20, marginVertical:10}}>
+            <View style={{flex:1, backgroundColor:'#D9D9D9', borderRadius:20, marginVertical:10}}>
               <ScrollView style={{margin:20}}>
                 <Text style={{fontWeight:'bold', fontSize:20}}>All Profit</Text>
                 {profitInfo && profitInfo.length > 0 ? (
@@ -319,7 +323,7 @@ export default function Profit() {
                 )}
               </ScrollView>
             </View>
-            <View style={{flex:1.8, backgroundColor:'#DEDEDE', borderRadius:20, marginBottom:10}}>
+            <View style={{flex:1.8, backgroundColor:'#D9D9D9', borderRadius:20, marginBottom:10}}>
               <ScrollView style={{margin:20}}>
                 <Text style={{fontWeight:'bold', fontSize:20}}>Individual items Sold</Text>
                 {singleItem && singleItem.length > 0 ? (
@@ -360,7 +364,7 @@ export default function Profit() {
             }
           {selectedInterval === 'Monthly' && 
             <View style={{flex:1}}>
-            <View style={{flex:1, backgroundColor:'#DEDEDE', borderRadius:20, marginVertical:10}}>
+            <View style={{flex:1, backgroundColor:'#D9D9D9', borderRadius:20, marginVertical:10}}>
               <ScrollView style={{margin:20}}>
                 <Text style={{fontWeight:'bold', fontSize:20}}>All Profit</Text>
                 {profitInfo && profitInfo.length > 0 ? (
@@ -393,7 +397,7 @@ export default function Profit() {
                 )}
               </ScrollView>
             </View>
-            <View style={{flex:1.8, backgroundColor:'#DEDEDE', borderRadius:20, marginBottom:10}}>
+            <View style={{flex:1.8, backgroundColor:'#D9D9D9', borderRadius:20, marginBottom:10}}>
               <ScrollView style={{margin:20}}>
                 <Text style={{fontWeight:'bold', fontSize:20}}>Individual items Sold</Text>
                 {singleItem && singleItem.length > 0 ? (
@@ -434,7 +438,7 @@ export default function Profit() {
             }
           {selectedInterval === 'Yearly' && 
             <View style={{flex:1}}>
-            <View style={{flex:1, backgroundColor:'#DEDEDE', borderRadius:20, marginVertical:10}}>
+            <View style={{flex:1, backgroundColor:'#D9D9D9', borderRadius:20, marginVertical:10}}>
               <ScrollView style={{margin:20}}>
                 <Text style={{fontWeight:'bold', fontSize:20}}>All Profit</Text>
                 {profitInfo && profitInfo.length > 0 ? (
@@ -467,7 +471,7 @@ export default function Profit() {
                 )}
               </ScrollView>
             </View>
-            <View style={{flex:1.8, backgroundColor:'#DEDEDE', borderRadius:20, marginBottom:10}}>
+            <View style={{flex:1.8, backgroundColor:'#D9D9D9', borderRadius:20, marginBottom:10}}>
               <ScrollView style={{margin:20}}>
                 <Text style={{fontWeight:'bold', fontSize:20}}>Individual items Sold</Text>
                 {singleItem && singleItem.length > 0 ? (

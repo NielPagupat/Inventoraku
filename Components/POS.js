@@ -385,7 +385,7 @@ export default function POS() {
                                 <TouchableOpacity onPress={()=>multiplierInput(0)} style={{flex:2.05, backgroundColor:'#CDCEC9', marginHorizontal:2, height:50, alignItems:'center', borderRadius: 5}}>
                                   <Text>0</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={{flexDirection:'row', marginHorizontal:2, alignItems:'center', flex:1, backgroundColor:'#E5D3B3', height:50, borderRadius:5, justifyContent:'space-evenly'}} onPress={hideBarcodeModal}>
+                                <TouchableOpacity style={{flexDirection:'row', marginHorizontal:2, alignItems:'center', flex:1, backgroundColor:'#E5D3B3', height:50, borderRadius:5, justifyContent:'space-evenly'}} onPress={hideMultiplyModal}>
                                   <FontAwesomeIcon style={{transform:[{rotate: '90deg'}], color:'#212427'}} icon={faTurnUp} />
                                   <Text style={{color:'#212427', fontWeight:'bold'}}>OK</Text>
                                 </TouchableOpacity>
