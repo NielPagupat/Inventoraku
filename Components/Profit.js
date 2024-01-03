@@ -272,7 +272,7 @@ export default function Profit() {
                             <Text>{obj.total_retail_price}</Text>
                           </View>
                           <View style={{flexDirection:'row'}}>
-                            <Text style={{fontWeight:'bold'}}>Profit: </Text>
+                            <Text style={{fontWeight:'bold'}}>Quantity: </Text>
                             <Text>{obj.total_quantity}</Text>
                           </View>
                           <View style={{flexDirection:'row'}}>
@@ -346,7 +346,7 @@ export default function Profit() {
                             <Text>{obj.total_retail_price}</Text>
                           </View>
                           <View style={{flexDirection:'row'}}>
-                            <Text style={{fontWeight:'bold'}}>Profit: </Text>
+                            <Text style={{fontWeight:'bold'}}>Quantity: </Text>
                             <Text>{obj.total_quantity}</Text>
                           </View>
                           <View style={{flexDirection:'row'}}>
@@ -420,7 +420,7 @@ export default function Profit() {
                             <Text>{obj.total_retail_price}</Text>
                           </View>
                           <View style={{flexDirection:'row'}}>
-                            <Text style={{fontWeight:'bold'}}>Profit: </Text>
+                            <Text style={{fontWeight:'bold'}}>Quantity: </Text>
                             <Text>{obj.total_quantity}</Text>
                           </View>
                           <View style={{flexDirection:'row'}}>
@@ -494,7 +494,7 @@ export default function Profit() {
                             <Text>{obj.total_retail_price}</Text>
                           </View>
                           <View style={{flexDirection:'row'}}>
-                            <Text style={{fontWeight:'bold'}}>Profit: </Text>
+                            <Text style={{fontWeight:'bold'}}>Quantity: </Text>
                             <Text>{obj.total_quantity}</Text>
                           </View>
                           <View style={{flexDirection:'row'}}>
