@@ -11,6 +11,7 @@ import { Modal, Portal, TextInput } from 'react-native-paper';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import axios from 'axios';
 import Link from '../Helpers/API';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 export default function Profit() {
   const navigation = useNavigation();
@@ -21,7 +22,7 @@ export default function Profit() {
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   const [open, setOpen] = useState(false);
-  const [date, setDate] = useState();
+  const [date, setDate] = useState('Please Choose Date');
 
   const [profitInfo, setProfitInfo] = useState([]);
   const [singleItem, setSingleItem] = useState([]);
@@ -188,40 +189,55 @@ export default function Profit() {
     // },[])
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor:'#FFFBF3' }}>
       <View>
         <TopNavigation Email={email} />
       </View>
       <View style={{ flex: 1 }}>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <Button onPress={() => handleIntervalChange('Daily')}>Daily</Button>
-          <Button onPress={() => handleIntervalChange('Weekly')}>Weekly</Button>
-          <Button onPress={() => handleIntervalChange('Monthly')}>Monthly</Button>
-          <Button onPress={() => handleIntervalChange('Yearly')}>Yearly</Button>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around', margin:10 }}>
+          <Button buttonColor={selectedInterval === 'Daily' ? '#987554' : ''} textColor={selectedInterval === 'Daily' ? 'white' : '#987554'} mode={selectedInterval === 'Daily' ? 'contained' : 'outlined'} onPress={() => handleIntervalChange('Daily')}>Daily</Button>
+          <Button buttonColor={selectedInterval === 'Weekly' ? '#987554' : ''} textColor={selectedInterval === 'Weekly' ? 'white' : '#987554'} mode={selectedInterval === 'Weekly' ? 'contained' : 'outlined'} onPress={() => handleIntervalChange('Weekly')}>Weekly</Button>
+          <Button buttonColor={selectedInterval === 'Monthly' ? '#987554' : ''} textColor={selectedInterval === 'Monthly' ? 'white' : '#987554'} mode={selectedInterval === 'Monthly' ? 'contained' : 'outlined'} onPress={() => handleIntervalChange('Monthly')}>Monthly</Button>
+          <Button buttonColor={selectedInterval === 'Yearly' ? '#987554' : ''} textColor={selectedInterval === 'Yearly' ? 'white' : '#987554'} mode={selectedInterval === 'Yearly' ? 'contained' : 'outlined'} onPress={() => handleIntervalChange('Yearly')}>Yearly</Button>
         </View>
-        <View style={{flex:1}}>
+        <View style={{flex:1, marginHorizontal: 20}}>
           <View style={{flexDirection:'row', alignItems:'center', justifyContent:'flex-end', padding:5}}>
-            <Text>Input Date:</Text>
-            <TouchableOpacity onPress={openDatePicker} style={{marginHorizontal:10}}>
+            <Text style={{}}>Input Date:</Text>
+            <TouchableOpacity onPress={openDatePicker} style={{marginLeft:5, marginRight:10, backgroundColor:'#D9D9D9', padding:5, borderRadius:5}}>
               <Text style={{color:'blue'}}>{date}</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={Search}><Text>Search</Text></TouchableOpacity>
-             {/*replace with Icon ↑*/}
+            <TouchableOpacity onPress={Search}>
+              <FontAwesomeIcon icon={faMagnifyingGlass}/>
+            </TouchableOpacity>
           </View>
-          {/* Render content based on the selected interval */}
           {selectedInterval === 'Daily' && 
             <View style={{flex:1}}>
-                <View style={{flex:1}}>
-                  <ScrollView>
-                    <Text>All Profit</Text>
+                <View style={{flex:1, backgroundColor:'#DEDEDE', borderRadius:20, marginVertical:10}}>
+                  <ScrollView style={{margin:20}}>
+                    <Text style={{fontWeight:'bold', fontSize:20}}>All Profit</Text>
                     {profitInfo && profitInfo.length > 0 ? (
                       profitInfo.map((obj, i) => (
-                        <View key={i}>
-                          <Text>Transaction IDs:{obj.transaction_ids}</Text>
-                          <Text>Total Capital: {obj.total_cost_price}</Text>
-                          <Text>Total Retail: {obj.total_retail_price}</Text>
-                          <Text>Profit: {obj.total_profit}</Text>
-                          <Text>date: {obj.sale_date}</Text>
+                        <View style={{margin:10}} key={i}>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Transaction IDs: </Text>
+                            <Text>{obj.transaction_ids}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Total Capital: </Text>
+                            <Text>{obj.total_cost_price}</Text>  
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Total Retail: </Text>
+                            <Text>{obj.total_retail_price}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Profit: </Text>
+                            <Text>{obj.total_profit}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Date: </Text>
+                            <Text>{obj.sale_date}</Text>
+                          </View>    
                         </View>
                       ))
                     ) : (
@@ -229,19 +245,36 @@ export default function Profit() {
                     )}
                   </ScrollView>
                 </View>
-                <View style={{flex:1}}>
-                  <ScrollView>
-                    <Text>Individual items Sold</Text>
+                <View style={{flex:1.8, backgroundColor:'#DEDEDE', borderRadius:20, marginBottom:10}}>
+                  <ScrollView style={{margin:20}}>
+                    <Text style={{fontWeight:'bold', fontSize:20}}>Individual items Sold</Text>
                     {singleItem && singleItem.length > 0 ? (
                       singleItem.map((obj, i) => (
-                        <View key={i}>
-                          <Text>PId: {obj.PID}</Text>
-                          <Text>Product Name: {obj.product_name}</Text>
-                          <Text>Product Capital: {obj.total_cost_price}</Text>
-                          <Text>Product Retail: {obj.total_retail_price}</Text>
-                          <Text>Total quantity: {obj.total_quantity}</Text>
-                          <Text>Date: {obj.date}</Text>
-                          
+                        <View style={{margin:10}} key={i}>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Transaction IDs: </Text>
+                            <Text>{obj.PID}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Transaction IDs: </Text>
+                            <Text>{obj.product_name}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Total Capital: </Text>
+                            <Text>{obj.total_cost_price}</Text>  
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Total Retail: </Text>
+                            <Text>{obj.total_retail_price}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Profit: </Text>
+                            <Text>{obj.total_quantity}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Date: </Text>
+                            <Text>{obj.date}</Text>
+                          </View>    
                         </View>
                       ))
                     ) : (
@@ -253,38 +286,70 @@ export default function Profit() {
             }
           {selectedInterval === 'Weekly' && 
             <View style={{flex:1}}>
-            <View style={{flex:1}}>
-              <ScrollView>
-                <Text>All Profit</Text>
+            <View style={{flex:1, backgroundColor:'#DEDEDE', borderRadius:20, marginVertical:10}}>
+              <ScrollView style={{margin:20}}>
+                <Text style={{fontWeight:'bold', fontSize:20}}>All Profit</Text>
                 {profitInfo && profitInfo.length > 0 ? (
                   profitInfo.map((obj, i) => (
-                    <View key={i}>
-                      <Text>Transaction IDs:{obj.transaction_ids}</Text>
-                      <Text>Total Capital: {obj.total_cost_price}</Text>
-                      <Text>Total Retail: {obj.total_retail_price}</Text>
-                      <Text>Profit: {obj.total_profit}</Text>
-                      <Text>date: {obj.sale_week_range}</Text>
-                    </View>
+                    <View style={{margin:10}} key={i}>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Transaction IDs: </Text>
+                            <Text>{obj.transaction_ids}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Total Capital: </Text>
+                            <Text>{obj.total_cost_price}</Text>  
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Total Retail: </Text>
+                            <Text>{obj.total_retail_price}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Profit: </Text>
+                            <Text>{obj.total_profit}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Date: </Text>
+                            <Text>{obj.sale_week_range}</Text>
+                          </View>    
+                        </View>
                   ))
                 ) : (
                   <Text>No Weekly profit information available</Text>
                 )}
               </ScrollView>
             </View>
-            <View style={{flex:1}}>
-              <ScrollView>
-                <Text>Individual items Sold</Text>
+            <View style={{flex:1.8, backgroundColor:'#DEDEDE', borderRadius:20, marginBottom:10}}>
+              <ScrollView style={{margin:20}}>
+                <Text style={{fontWeight:'bold', fontSize:20}}>Individual items Sold</Text>
                 {singleItem && singleItem.length > 0 ? (
                   singleItem.map((obj, i) => (
-                    <View key={i}>
-                      <Text>PId: {obj.PID}</Text>
-                      <Text>Product Name: {obj.product_name}</Text>
-                      <Text>Product Capital: {obj.total_cost_price}</Text>
-                      <Text>Product Retail: {obj.total_retail_price}</Text>
-                      <Text>Total quantity: {obj.total_quantity}</Text>
-                      <Text>Date: {obj.sale_week_range}</Text>
-                      
-                    </View>
+                    <View style={{margin:10}} key={i}>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Transaction IDs: </Text>
+                            <Text>{obj.PID}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Transaction IDs: </Text>
+                            <Text>{obj.product_name}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Total Capital: </Text>
+                            <Text>{obj.total_cost_price}</Text>  
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Total Retail: </Text>
+                            <Text>{obj.total_retail_price}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Profit: </Text>
+                            <Text>{obj.total_quantity}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Date: </Text>
+                            <Text>{obj.sale_week_range}</Text>
+                          </View>    
+                        </View>
                   ))
                 ) : (
                   <Text>No Weekly Individual Profit available</Text>
@@ -295,38 +360,70 @@ export default function Profit() {
             }
           {selectedInterval === 'Monthly' && 
             <View style={{flex:1}}>
-            <View style={{flex:1}}>
-              <ScrollView>
-                <Text>All Profit</Text>
+            <View style={{flex:1, backgroundColor:'#DEDEDE', borderRadius:20, marginVertical:10}}>
+              <ScrollView style={{margin:20}}>
+                <Text style={{fontWeight:'bold', fontSize:20}}>All Profit</Text>
                 {profitInfo && profitInfo.length > 0 ? (
                   profitInfo.map((obj, i) => (
-                    <View key={i}>
-                      <Text>Transaction IDs:{obj.transaction_ids}</Text>
-                      <Text>Total Capital: {obj.total_cost_price}</Text>
-                      <Text>Total Retail: {obj.total_retail_price}</Text>
-                      <Text>Profit: {obj.total_profit}</Text>
-                      <Text>date: {obj.sale_month}</Text>
-                    </View>
+                    <View style={{margin:10}} key={i}>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Transaction IDs: </Text>
+                            <Text>{obj.transaction_ids}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Total Capital: </Text>
+                            <Text>{obj.total_cost_price}</Text>  
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Total Retail: </Text>
+                            <Text>{obj.total_retail_price}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Profit: </Text>
+                            <Text>{obj.total_profit}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Date: </Text>
+                            <Text>{obj.sale_month}</Text>
+                          </View>    
+                        </View>
                   ))
                 ) : (
                   <Text>No Monthly profit information available</Text>
                 )}
               </ScrollView>
             </View>
-            <View style={{flex:1}}>
-              <ScrollView>
-                <Text>Individual items Sold</Text>
+            <View style={{flex:1.8, backgroundColor:'#DEDEDE', borderRadius:20, marginBottom:10}}>
+              <ScrollView style={{margin:20}}>
+                <Text style={{fontWeight:'bold', fontSize:20}}>Individual items Sold</Text>
                 {singleItem && singleItem.length > 0 ? (
                   singleItem.map((obj, i) => (
-                    <View key={i}>
-                      <Text>PId: {obj.PID}</Text>
-                      <Text>Product Name: {obj.product_name}</Text>
-                      <Text>Product Capital: {obj.total_cost_price}</Text>
-                      <Text>Product Retail: {obj.total_retail_price}</Text>
-                      <Text>Total quantity: {obj.total_quantity}</Text>
-                      <Text>Date: {obj.sale_month}</Text>
-                      
-                    </View>
+                    <View style={{margin:10}} key={i}>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Transaction IDs: </Text>
+                            <Text>{obj.PID}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Transaction IDs: </Text>
+                            <Text>{obj.product_name}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Total Capital: </Text>
+                            <Text>{obj.total_cost_price}</Text>  
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Total Retail: </Text>
+                            <Text>{obj.total_retail_price}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Profit: </Text>
+                            <Text>{obj.total_quantity}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Date: </Text>
+                            <Text>{obj.sale_month}</Text>
+                          </View>    
+                        </View>
                   ))
                 ) : (
                   <Text>No Monthly Individual Profit available</Text>
@@ -337,38 +434,70 @@ export default function Profit() {
             }
           {selectedInterval === 'Yearly' && 
             <View style={{flex:1}}>
-            <View style={{flex:1}}>
-              <ScrollView>
-                <Text>All Profit</Text>
+            <View style={{flex:1, backgroundColor:'#DEDEDE', borderRadius:20, marginVertical:10}}>
+              <ScrollView style={{margin:20}}>
+                <Text style={{fontWeight:'bold', fontSize:20}}>All Profit</Text>
                 {profitInfo && profitInfo.length > 0 ? (
                   profitInfo.map((obj, i) => (
-                    <View key={i}>
-                      <Text>Transaction IDs:{obj.transaction_ids}</Text>
-                      <Text>Total Capital: {obj.total_cost_price}</Text>
-                      <Text>Total Retail: {obj.total_retail_price}</Text>
-                      <Text>Profit: {obj.total_profit}</Text>
-                      <Text>date: {obj.sale_year}</Text>
-                    </View>
+                    <View style={{margin:10}} key={i}>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Transaction IDs: </Text>
+                            <Text>{obj.transaction_ids}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Total Capital: </Text>
+                            <Text>{obj.total_cost_price}</Text>  
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Total Retail: </Text>
+                            <Text>{obj.total_retail_price}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Profit: </Text>
+                            <Text>{obj.total_profit}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Date: </Text>
+                            <Text>{obj.sale_year}</Text>
+                          </View>    
+                        </View>
                   ))
                 ) : (
                   <Text>No Yearly profit information available</Text>
                 )}
               </ScrollView>
             </View>
-            <View style={{flex:1}}>
-              <ScrollView>
-                <Text>Individual items Sold</Text>
+            <View style={{flex:1.8, backgroundColor:'#DEDEDE', borderRadius:20, marginBottom:10}}>
+              <ScrollView style={{margin:20}}>
+                <Text style={{fontWeight:'bold', fontSize:20}}>Individual items Sold</Text>
                 {singleItem && singleItem.length > 0 ? (
                   singleItem.map((obj, i) => (
-                    <View key={i}>
-                      <Text>PId: {obj.PID}</Text>
-                      <Text>Product Name: {obj.product_name}</Text>
-                      <Text>Product Capital: {obj.total_cost_price}</Text>
-                      <Text>Product Retail: {obj.total_retail_price}</Text>
-                      <Text>Total quantity: {obj.total_quantity}</Text>
-                      <Text>Date: {obj.sale_year}</Text>
-                      
-                    </View>
+                    <View style={{margin:10}} key={i}>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Transaction IDs: </Text>
+                            <Text>{obj.PID}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Transaction IDs: </Text>
+                            <Text>{obj.product_name}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Total Capital: </Text>
+                            <Text>{obj.total_cost_price}</Text>  
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Total Retail: </Text>
+                            <Text>{obj.total_retail_price}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Profit: </Text>
+                            <Text>{obj.total_quantity}</Text>
+                          </View>
+                          <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight:'bold'}}>Date: </Text>
+                            <Text>{obj.sale_year}</Text>
+                          </View>    
+                        </View>
                   ))
                 ) : (
                   <Text>No Yearly Individual Profit available</Text>
@@ -380,13 +509,13 @@ export default function Profit() {
         </View>
       </View>
       <Portal>
-        <Modal style={{backgroundColor:'#987554'}} visible={open} transparent={true}>
-          <View style={{alignItems:'center'}}>
+        <Modal style={{marginTop:'50%', margin:20, width:'90%', height:450, backgroundColor:'#F5F5F5', borderRadius:20, padding:35}} visible={open} transparent={true}>
+          <View style={{alignItems:'center', marginBottom:5}}>
+          <DatePicker options={{textHeaderColor:'#987554', mainColor:'#987554', selectedTextColor:'#F5F5F5'}} style={{backgroundColor:'#F5F5F5'}} mode='calendar' selected={date} onDateChange={handleChange}/>
             <TouchableOpacity onPress={openDatePicker}>
-              <Text>CLOSE</Text>
+              <Text style={{fontWeight:'bold'}}>CLOSE</Text>
             </TouchableOpacity>
           </View>
-          <DatePicker mode='calendar' selected={date} onDateChange={handleChange}/>
         </Modal>
       </Portal>
       <View>
