@@ -87,11 +87,11 @@ export default function ProductInfo() {
     if (ResInfo == null) {
       SetVisible(true);
     } else {
-      setSuppName(ResInfo.suppliername)
+      setSuppName(ResInfo.supplier_name)
       setSuppEmail(ResInfo.Supplier_email)
-      setQTY(ResInfo.qty)
+      setQTY(ResInfo.qty.toString())
       setDelvAddress(ResInfo.delivery_address)
-      setExDeliveryDate(ResInfo.expected_delivery)
+      setExDeliveryDate(ResInfo.expected_delivery.toString())
       SetVisible(true);
       
     }

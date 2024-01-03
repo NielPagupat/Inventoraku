@@ -22,7 +22,7 @@ export default function Profit() {
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   const [open, setOpen] = useState(false);
-  const [date, setDate] = useState('Please Choose Date');
+  const [date, setDate] = useState('Set Date');
 
   const [profitInfo, setProfitInfo] = useState([]);
   const [singleItem, setSingleItem] = useState([]);

@@ -9,6 +9,7 @@ import Inventory from "../Components/Inventory";
 import AddProduct from "../Components/AddProduct";
 import ProductInfo from '../Components/ProductInfo';
 import Profit from '../Components/Profit';
+import OrderDetails from '../Components/OrderDetails';
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
         <Stack.Screen name="AddProduct" component={AddProduct} options={{ headerShown: false }}/>
         <Stack.Screen name="ProductInfo" component={ProductInfo} options={{ headerShown: false }} />
         <Stack.Screen name="Profit" component={Profit} options={{ headerShown: false }} />
+        <Stack.Screen name="orderDetails" component={OrderDetails} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
