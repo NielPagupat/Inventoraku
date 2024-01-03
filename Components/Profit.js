@@ -59,25 +59,17 @@ export default function Profit() {
         break;
     }}
 
-    const onChange = (event, selectedDate) => {
-      const currentDate = selectedDate || date;
-      setShowDatePicker(Platform.OS === 'ios'); // For iOS, keep showing until 'Done' is pressed
-      setDate(currentDate);
-    };
-
-    const showPicker = () => {
-      setShowDatePicker(true);
-    };
-
-
-
+    const convertDate = (originalDate) =>{
+      const parts = originalDate.split('/')
+      return parts.join('-')
+    }
+   
     const openDatePicker = () => {
       setOpen(!open);
     }
     const handleChange = (propDate) => {
-      setDate(propDate);
-      
-      console.log(propDate.getYear);
+      const readableDate = convertDate(propDate)
+      setDate(readableDate);
     }
 
     const setDaily = async() => {
@@ -210,7 +202,9 @@ export default function Profit() {
         <View style={{flex:1}}>
           <View style={{flexDirection:'row', alignItems:'center', justifyContent:'flex-end', padding:5}}>
             <Text>Input Date:</Text>
-            <TextInput label='yyyy-mm-dd' style={{width:150, marginLeft:5, heigh:30}} onChangeText={setDate} value={date}/>
+            <TouchableOpacity onPress={openDatePicker} style={{marginHorizontal:10}}>
+              <Text style={{color:'blue'}}>{date}</Text>
+            </TouchableOpacity>
             <TouchableOpacity onPress={Search}><Text>Search</Text></TouchableOpacity>
              {/*replace with Icon ↑*/}
           </View>
@@ -385,11 +379,6 @@ export default function Profit() {
             }
         </View>
       </View>
-      {/* <View style={{flex:3, alignItems:'center'}}>
-        <TouchableOpacity onPress={openDatePicker}>
-          <Text>OPEN THIS BOYE</Text>
-        </TouchableOpacity>
-
       <Portal>
         <Modal style={{backgroundColor:'#987554'}} visible={open} transparent={true}>
           <View style={{alignItems:'center'}}>
@@ -400,7 +389,6 @@ export default function Profit() {
           <DatePicker mode='calendar' selected={date} onDateChange={handleChange}/>
         </Modal>
       </Portal>
-      </View> */}
       <View>
         <BottomNavigation Email={email} />
       </View>
