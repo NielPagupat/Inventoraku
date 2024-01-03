@@ -24,7 +24,7 @@ export default function Inventory() {
         'userID': userID
       }})
       SetAllProducts(all.data.userData)
-      console.log(all.data)
+      
     }
     
     const refreshTimer = setInterval(() => {
