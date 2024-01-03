@@ -47,6 +47,10 @@ export default function Inventory() {
   const goToDashBoard = () => {
     navigation.navigate('Dashboard', {email})
   }
+
+  const goToOrderDetails = () => {
+    navigation.navigate('orderDetails', {email, userID})
+  }
   return (
     <SafeAreaView style={{flex:1, backgroundColor:'#FFFBF3'}}>
       <View style={{backgroundColor:'#F5F5F5'}}><TopNavigation val="Dashboard" Email={email} onPress={goToDashBoard}/></View>
@@ -60,7 +64,7 @@ export default function Inventory() {
         <MyDataTable products={ allProducts } email = {email}/>
       </View>
       <View style={{flexDirection:'row', width:'100%', justifyContent:'space-around', marginVertical:15}}>
-        <TouchableOpacity onPress={showUID}>
+        <TouchableOpacity onPress={goToOrderDetails}>
           <Text style={{fontWeight:'bold', color:'#987554', marginRight:10}}>Order Details</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={goToAdd}>
